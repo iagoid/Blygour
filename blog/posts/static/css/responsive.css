@@ -1,0 +1,30 @@
+@media only screen and (max-width: 768px) {
+    /* Imagem Postagem */
+    .row.post img{
+        border-radius: 6px;
+        width:80vw;
+    }
+ }
+
+
+@media only screen and (min-width: 1400px) {
+    /* Imagem Postagem */  
+    .row.post h5{
+        margin-right: 50px;
+        font-size: max(26px, 1.5vw);
+    }
+        
+    .row.post img{
+        width: 25vw;
+    }
+    
+ }
+
+ @media only screen and (min-width: 2000px) {
+     /* Imagem Postagem */
+          
+    .row.post img{
+        width: 20vw;
+    }
+    
+ }

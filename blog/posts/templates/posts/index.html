@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Página Inicial
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container postagem">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="field">
+                {{ form.text }}
+            </div>
+
+            <div class='form-group image'>
+                <label for='input-file'>
+                    Selecionar um arquivo
+                </label>
+                {{ form.image }}
+                <span id='file-name'></span>
+
+                <input type="submit" class="btn btn-primary" value="Enviar">
+            </div>
+
+        </form>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class='alert alert-{{ message.tags }}' {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+    {% for post in posts %}
+        <div class="container view-posts">
+
+            <div class="row user">
+                <div class="col-1 text">
+                    Foto Usuário
+                </div>
+
+                <div class="col-9 text">
+                    <h6>Jorge Ismit Jorge Ismit Jorge Ismit</h6>
+                </div>
+                <div class="col-2 text">
+
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Editar</a>
+                            <a class="dropdown-item" href="delete/{{ post.id }}">Excluir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="posts/{{ post.id }}">
+                <div class="row post">
+                    <div class="col-1"></div>
+
+                    <div class="col-10">
+                        <img src="/media/{{ post.image }}" class="img-thumbnail" alt="Responsive image">
+                        <h5>{{ post.text| slice:"0:500" }}...</h5>
+                    </div>
+                </div>
+
+                <div class="col-1"></div>
+            </a>
+        </div>
+
+    {% endfor %}
+</div>{# Fecha a div da base #}
+
+    <div class="container">
+        <nav class='pages'>
+            <ul class="pagination">
+
+                {% if posts.has_previous %}
+                <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.1 }}">1</a>
+                </li>
+                
+                {% endif %}
+
+
+
+
+
+                
+
+                {% if posts.paginator.num_pages %}
+                <li class="page-item actual-page">
+                    <a class="page-link" href="?page={{ posts.number }}">{{ posts.number }}</a>
+                </li>
+
+                {% endif %}
+
+               
+
+                {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.paginator.num_pages }}">{{ posts.paginator.num_pages }}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endblock content %}

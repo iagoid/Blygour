@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Página Inicial
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container view-posts">
+
+        <div class="row user">
+            <div class="col-1 text">
+                Foto Usuário</div>
+
+            <div class="col-9 text">
+                <h6>Jorge Ismit Jorge</h6>
+            </div>
+            <div class="col-2 text">
+
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Editar</a>
+                        <a class="dropdown-item" href="delete/{{ post.id }}">Excluir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row post">
+            <div class="col-1"></div>
+
+            <div class="col-10">
+                <img src="/media/{{ post.image }}" class="img-thumbnail" alt="Responsive image">
+                <h5>{{ post.text }}...</h5>
+            </div>
+        </div>
+
+        <div class="col-1"></div>
+    </div>
+
+</div>
+
+{% endblock content %}
