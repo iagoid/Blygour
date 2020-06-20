@@ -1,0 +1,135 @@
+/* Formulário de postagens */
+.container.postagem{
+    margin-top: 10px;
+    border: 1px solid #9761E8;
+}
+
+textarea{
+    margin-top: 15px;
+    resize: none;
+}
+
+.form-group.image{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+input[type='file'] {
+    display: none
+  }
+  
+.form-group.image label {
+    background-color: #3498db;
+    border-radius: 5px;
+    color: #fff;
+    margin: 10px;
+    padding: 6px 20px
+}
+  
+.form-group.image label:hover {
+    background-color: #2980b9
+}
+
+/* Mensagem */
+ul.messages{
+    padding: 0;
+    text-align: center;
+}
+
+ul.messages li{
+    list-style: none;
+}
+
+
+/* Postagens */
+
+.container.view-posts{
+    border: 1px solid #9761E8;
+}
+
+.row.user{
+    margin-bottom: 10px;
+}
+
+.row.user .text{
+    margin-top: 15px;
+}
+
+.row.user .dropdown-toggle{
+    color: white;
+}
+
+.row.user .dropdown-menu{
+    background-color: #9761E8;
+    border-radius: 8px;
+}
+.row.user .dropdown-item{
+    border-radius: 4px;
+}
+
+.row.user .dropdown-item:hover{
+    background-color: #7B4FBD;
+}
+
+.container.view-posts a{
+    color: black;
+}
+
+.container.view-posts a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+/* Postagem Texto e Imagem */
+
+.row.post{
+    margin-bottom: 10px;
+}
+
+.row.post h5{
+    margin-right: 50px;
+    font-size: max(22px, 1vw);
+}
+
+.row.post #div-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row.post img{
+    border-radius: 6px;
+    width: 30vw;
+    float: right;
+}
+
+/* Pagination */
+nav.pages{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+nav.pages .page-item a{
+    background-color: white;
+    color: #6C46A6;
+    font-size: 18px;
+}
+nav.pages .page-item a:hover{
+    background-color: #6C46A6;
+    color: white;
+}
+
+nav.pages .page-item.actual-page a{
+    background-color: #492F70;
+    color: white;
+}
+
+
+nav.pages .page-item.reticencias{
+    color: #007bff;
+}

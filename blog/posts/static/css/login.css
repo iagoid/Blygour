@@ -1,0 +1,10 @@
+/* Login */
+.container-fluid.login{
+    margin-top: 50px;
+}
+
+/* Register */
+
+.card-body.register{
+    background-color: white;
+}

@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% load crispy_forms_tags %}
 
 {% block title %}
     Página Inicial
 {% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock styles %}
 
 {% block content %}
 
@@ -48,16 +54,20 @@
                 <div class="col-9 text">
                     <h6>Jorge Ismit Jorge Ismit Jorge Ismit</h6>
                 </div>
-                <div class="col-2 text">
 
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Editar</a>
-                            <a class="dropdown-item" href="delete/{{ post.id }}">Excluir</a>
+                {% if user.is_authenticated %}
+                    <div class="col-2 text">
+
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Editar</a>
+                                <a class="dropdown-item" href="delete/{{ post.id }}">Excluir</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
+
             </div>
 
             <a href="posts/{{ post.id }}">
@@ -75,51 +85,65 @@
         </div>
 
     {% endfor %}
-</div>{# Fecha a div da base #}
+</div>
+{# Fecha a div da base #}
 
-    <div class="container">
-        <nav class='pages'>
-            <ul class="pagination">
+<div class="container">
+    <nav class='pages'>
+        <ul class="pagination">
 
-                {% if posts.has_previous %}
+            {# Páginação anterior #}
+            {% if posts.has_previous %}
                 <li class="page-item">
-                        <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
                 </li>
 
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.1 }}">1</a>
+                    <a class="page-link" href="/">1</a>
                 </li>
-                
-                {% endif %}
 
+                <li class="page-item reticencias">
+                    <a class="page-link">...</a>
+                </li>
 
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
+                </li>
 
+            {% endif %}
 
-
-                
-
-                {% if posts.paginator.num_pages %}
+            {# Paginação atual #}
+            {% if posts.paginator.num_pages %}
                 <li class="page-item actual-page">
                     <a class="page-link" href="?page={{ posts.number }}">{{ posts.number }}</a>
                 </li>
+            {% endif %}
 
-                {% endif %}
+            {# Paginação posterior #}
+            {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
+                </li>
 
-               
+                <li class="page-item reticencias">
+                    <a class="page-link">...</a>
+                </li>
 
-                {% if posts.has_next %}
                 <li class="page-item">
                     <a class="page-link" href="?page={{ posts.paginator.num_pages }}">{{ posts.paginator.num_pages }}</a>
                 </li>
+
                 <li class="page-item">
                     <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
+
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
 {% endblock content %}

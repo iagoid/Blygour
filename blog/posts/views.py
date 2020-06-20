@@ -4,6 +4,7 @@ from .forms import PostForm
 from . models import Post
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 def postsList(request):
     posts_list = Post.objects.all().order_by('-created_at')
@@ -32,6 +33,7 @@ def viewPost(request, id):
     post = get_object_or_404(Post, pk=id)
     return render(request, 'posts/postagem.html', {'post': post})
 
+@login_required
 def deletePost(request, id):
     post = get_object_or_404(Post, pk=id)
     post.delete()
