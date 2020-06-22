@@ -12,12 +12,17 @@ def get_file_path(instance, filename):
 
 class Post(models.Model):
 
-    text = models.TextField()
+    text = models.TextField('Texto da Postagem')
     #Salva a imagem com um nome randomizado
-    image = models.FileField(upload_to = get_file_path)
+    image = models.FileField(upload_to = get_file_path, verbose_name='Imagem', null=True, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
+    created_at = models.DateTimeField('Criado em :', auto_now_add = True)
+    updated_at = models.DateTimeField('Modificado em :', auto_now = True)
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        verbose_name = 'Postagem'
+        verbose_name_plural = 'Postagens'
+        ordering = ['text']

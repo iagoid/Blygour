@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     Página Inicial
 {% endblock title %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/postagem.css' %}">
+{% endblock styles %}
+
+
 {% block content %}
 
-    <div class="container view-posts">
+    <div class="container view-posts details">
 
         <div class="row user">
             <div class="col-1 text">
@@ -31,8 +37,10 @@
             <div class="col-1"></div>
 
             <div class="col-10">
+                {% if post.image %}
                 <img src="/media/{{ post.image }}" class="img-thumbnail" alt="Responsive image">
-                <h5>{{ post.text }}...</h5>
+                {% endif %}
+                <h5>{{ post.text|linebreaks }}</h5>
             </div>
         </div>
 

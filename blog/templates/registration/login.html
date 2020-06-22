@@ -26,7 +26,7 @@
                         {{ form|crispy }}
                         <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                     </form>
-                    <p class='change-form-p'><a href="/users/register"> Não possui uma conta? Clique Aqui </a></p>
+                    <p class='change-form-p'><a href="{% url 'users:signup' %}"> Não possui uma conta? Clique Aqui </a></p>
 
                 </div>
             </div>

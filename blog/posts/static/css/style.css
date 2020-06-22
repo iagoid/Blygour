@@ -3,12 +3,10 @@ body{
     background-image: linear-gradient(to right, #472E6E, #5A3B8C, #472E6E);
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, p{
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    
+    font-family: 'Noto Sans KR', sans-serif;
 }
-
 
 
 /* Navbar */

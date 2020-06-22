@@ -75,8 +75,13 @@
                     <div class="col-1"></div>
 
                     <div class="col-10">
+                        {% if post.image %}
                         <img src="/media/{{ post.image }}" class="img-thumbnail" alt="Responsive image">
-                        <h5>{{ post.text| slice:"0:500" }}...</h5>
+                        {% endif %}
+                        
+                       {{ post.text|slice:"0:500"|linebreaks }}
+                        
+                        <p class='continue_lendo'><i> Clique para continuar lendo </i><p>
                     </div>
                 </div>
 
