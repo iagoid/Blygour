@@ -12,10 +12,15 @@ class PostForm(forms.ModelForm):
 
         # Faz a formatação dos widgets
         widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'maxlength': 100,
+                'placeholder': 'Título',
+                'id': 'postagem_title',
+            }),
             'text': forms.Textarea(attrs={
                 'class': 'form-control',
-                'maxlenght': 255,
-                'placeholder': 'O que está acontecendo?',
+                'placeholder': 'Digite aqui o seu artigo',
             }),
             'image': forms.ClearableFileInput(attrs={
                 'id': 'input-file',

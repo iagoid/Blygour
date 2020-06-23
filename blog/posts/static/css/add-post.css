@@ -1,0 +1,46 @@
+/* Formulário de postagens */
+.container.postagem{
+    border: 1px solid #9761E8;
+}
+
+.container.postagem .field{
+    margin-top: 10px;
+}
+
+textarea{
+    margin-top: 15px;
+    resize: none;
+}
+
+.form-group.image{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+input[type='file'] {
+    display: none
+  }
+  
+.form-group.image label {
+    background-color: #3498db;
+    border-radius: 5px;
+    color: #fff;
+    margin: 10px;
+    padding: 6px 20px
+}
+  
+.form-group.image label:hover {
+    background-color: #2980b9
+}
+
+/* Mensagem */
+ul.messages{
+    padding: 0;
+    text-align: center;
+}
+
+ul.messages li{
+    list-style: none;
+}

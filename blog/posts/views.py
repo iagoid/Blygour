@@ -27,11 +27,28 @@ def postsList(request):
         form = PostForm()
         return render(request, 'posts/index.html', {'posts': posts, 'form': form})
    
-    return render(request, 'posts/index.html', {'posts': posts, 'text':text})
+    # return render(request, 'posts/index.html', {'posts': posts})
+
+@login_required
+def addPost(request):
+    page = request.GET.get('page') 
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            post = form.save(commit = False)
+            post.save()
+            messages.info(request, 'Postagem Publicada com Sucesso')
+            return redirect('/')
+
+    else:
+        form = PostForm()
+        return render(request, 'posts/add-post.html', {'form': form})
 
 def viewPost(request, id):
     post = get_object_or_404(Post, pk=id)
-    return render(request, 'posts/postagem.html', {'post': post})
+    return render(request, 'posts/details.html', {'post': post})
 
 @login_required
 def deletePost(request, id):

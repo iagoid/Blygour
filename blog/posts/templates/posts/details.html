@@ -6,9 +6,8 @@
 {% endblock title %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'css/postagem.css' %}">
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
 {% endblock styles %}
-
 
 {% block content %}
 
@@ -21,16 +20,27 @@
             <div class="col-9 text">
                 <h6>Jorge Ismit Jorge</h6>
             </div>
+
+            {% if user.is_authenticated %}
             <div class="col-2 text">
 
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#">Editar</a>
-                        <a class="dropdown-item" href="delete/{{ post.id }}">Excluir</a>
+                        <a class="dropdown-item" href="/delete/{{ post.id }}">Excluir</a>
                     </div>
                 </div>
             </div>
+            {% endif %}
+        </div>
+
+        <div class="row title">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <h2>{{ post.title }}</h2>
+            </div>
+            <div class="col-1"></div>
         </div>
 
         <div class="row post">
@@ -38,7 +48,7 @@
 
             <div class="col-10">
                 {% if post.image %}
-                <img src="/media/{{ post.image }}" class="img-thumbnail" alt="Responsive image">
+                    <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
                 {% endif %}
                 <h5>{{ post.text|linebreaks }}</h5>
             </div>

@@ -1,38 +1,8 @@
-/* Formulário de postagens */
-.container.postagem{
-    margin-top: 10px;
-    border: 1px solid #9761E8;
-}
-
-textarea{
-    margin-top: 15px;
-    resize: none;
-}
-
-.form-group.image{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
-
-input[type='file'] {
-    display: none
-  }
-  
-.form-group.image label {
-    background-color: #3498db;
-    border-radius: 5px;
-    color: #fff;
-    margin: 10px;
-    padding: 6px 20px
-}
-  
-.form-group.image label:hover {
-    background-color: #2980b9
-}
-
 /* Mensagem */
+.container.messages{
+    margin-top: 10px;
+}
+
 ul.messages{
     padding: 0;
     text-align: center;
@@ -44,9 +14,9 @@ ul.messages li{
 
 
 /* Postagens */
-
 .container.view-posts{
     border: 1px solid #9761E8;
+    margin-top: 5px;
 }
 
 .row.user{
@@ -82,11 +52,19 @@ ul.messages li{
     text-decoration: none;
 }
 
-/* Postagem Texto e Imagem */
+/* Postagem Titulo */
+.container.view-posts .row.title h2{
+    text-align: center;
+    font-size: max(24px, 1vw);
+    overflow-wrap: break-word;
+}
 
+/*Postagem Texto */
 .row.post{
     margin-bottom: 10px;
+    margin-top: 10px;
 }
+
 
 .row.post.details{
     margin-bottom: 10px;
@@ -94,13 +72,15 @@ ul.messages li{
 
 .row.post p{
     margin-right: 50px;
-    font-size: max(22px, 1vw);
+    font-size: max(18px, 0.8vw);
+    overflow-wrap: break-word;
 }
 
 .row.post p.continue_lendo{
-    font-size: max(15px, 0.7vw);
+    font-size: max(12px, 0.5vw);
 }
 
+/* Postagem Imagem */
 .row.post #div-image{
     display: flex;
     align-items: center;
@@ -135,9 +115,4 @@ nav.pages .page-item a:hover{
 nav.pages .page-item.actual-page a{
     background-color: #492F70;
     color: white;
-}
-
-
-nav.pages .page-item.reticencias{
-    color: #007bff;
 }

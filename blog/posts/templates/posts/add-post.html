@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Página Inicial
+{% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/add-post.css' %}">
+{% endblock styles %}
+
+{% block content %}
+
+    <div class="container postagem">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="field">
+                {{ form.title }}
+                {{ form.text }}
+            </div>
+
+            <div class='form-group image'>
+                <label for='input-file'>
+                    Selecionar um arquivo
+                </label>
+                {{ form.image }}
+                <span id='file-name'></span>
+
+                <input type="submit" class="btn btn-primary" value="Enviar">
+            </div>
+
+        </form>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class='alert alert-{{ message.tags }}' {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+{% endblock content %}

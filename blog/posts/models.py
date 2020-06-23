@@ -12,6 +12,7 @@ def get_file_path(instance, filename):
 
 class Post(models.Model):
 
+    title = models.CharField('Título', max_length=100)
     text = models.TextField('Texto da Postagem')
     #Salva a imagem com um nome randomizado
     image = models.FileField(upload_to = get_file_path, verbose_name='Imagem', null=True, blank=True)
