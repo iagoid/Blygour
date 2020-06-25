@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.utils.crypto import get_random_string
 import os
 
@@ -14,6 +15,7 @@ class Post(models.Model):
 
     title = models.CharField('Título', max_length=100)
     text = models.TextField('Texto da Postagem')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True)
     #Salva a imagem com um nome randomizado
     image = models.FileField(upload_to = get_file_path, verbose_name='Imagem', null=True, blank=True)
 

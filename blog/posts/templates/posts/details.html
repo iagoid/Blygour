@@ -14,26 +14,28 @@
     <div class="container view-posts details">
 
         <div class="row user">
-            <div class="col-1 text">
-                Foto Usuário</div>
-
-            <div class="col-9 text">
-                <h6>Jorge Ismit Jorge</h6>
-            </div>
-
-            {% if user.is_authenticated %}
-            <div class="col-2 text">
-
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Editar</a>
-                        <a class="dropdown-item" href="/delete/{{ post.id }}">Excluir</a>
-                    </div>
+                <div class="col col-sm-3 col-md-2 col-lg-1">
+                    <img class='user-picture' src="/media/original.jpg" alt="">
                 </div>
+                
+                <div class="col-6 col-sm-8 col-md-9 col-lg-10 text">
+                    <h6>Jorge Ismit Jorge Ismit Jorge Ismit</h6>
+                </div>
+
+                {% if user.is_authenticated %}
+                    <div class="col-2 col-sm-1 col-md-1 col-lg-1">
+
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Editar</a>
+                                <a class="dropdown-item" href="delete/{{ post.id }}">Excluir</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
             </div>
-            {% endif %}
-        </div>
 
         <div class="row title">
             <div class="col-1"></div>

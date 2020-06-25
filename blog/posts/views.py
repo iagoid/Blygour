@@ -14,37 +14,25 @@ def postsList(request):
 
     posts = paginator.get_page(page)
     
-
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            post = form.save(commit = False)
-            post.save()
-            return redirect('/')
-
-    else:
-        form = PostForm()
-        return render(request, 'posts/index.html', {'posts': posts, 'form': form})
-   
-    # return render(request, 'posts/index.html', {'posts': posts})
+    return render(request, 'posts/index.html', {'posts': posts})
 
 @login_required
 def addPost(request):
-    page = request.GET.get('page') 
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
 
         if form.is_valid():
             post = form.save(commit = False)
+            post.user = request.user
             post.save()
             messages.info(request, 'Postagem Publicada com Sucesso')
             return redirect('/')
 
     else:
-        form = PostForm()
+        form = PostForm(request.POST, request.FILES)
         return render(request, 'posts/add-post.html', {'form': form})
+        
 
 def viewPost(request, id):
     post = get_object_or_404(Post, pk=id)
