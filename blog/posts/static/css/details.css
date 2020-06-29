@@ -21,14 +21,8 @@ ul.messages li{
 }
 
 .row.user img.user-picture{
-    height: 80px;
-	width: 80px;
-	object-fit: cover; 
-	/*Até aqui deixa a imagem em um tamanho e corta o excesso da imagem deixando-a quadrada*/
-	background-image: linear-gradient(220deg, #c52e92, #fa9f4e 100%);
-	background-origin: border-box;
-	background-clip: padding-box, border-box;
-	padding: 3px;
+    height: 70px;
+	width: 70px;
 	border-radius: 50vh;
 }
 

@@ -1,3 +1,9 @@
+/* Variaveis */
+:root {
+    --roxo-principal: #3B275C;
+    --roxo-escuro: #241838;
+}
+
 /* Formatação padrão */
 body{
     background-image: linear-gradient(to right, #472E6E, #5A3B8C, #472E6E);
@@ -11,9 +17,34 @@ h1, h2, h3, h4, h5, h6, p{
 
 /* Navbar */
 .navbar.navbar-expand-lg{
-    background-color: #3B275C;
+    background-color: var(--roxo-principal);
     border-radius: 0 0 4px 4px;
     border-bottom: 1px solid #2B1C42;
+}
+
+.navbar.navbar-expand-lg img.user-picture{
+    height: 60px;
+	width: 60px;
+    border-radius: 50vh;
+    margin-right: 15px;
+}
+
+.navbar.navbar-expand-lg .dropdown-perfil{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.navbar.navbar-expand-lg .navbar-brand{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    transform: rotate(-3deg);
+    padding: 0;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.navbar.navbar-expand-lg .logo{
+    width: 50px;
+    height: 50px;
 }
 
 .navbar-toggler{
@@ -35,11 +66,11 @@ h1, h2, h3, h4, h5, h6, p{
 }
 
 .dropdown-menu{
-    background-color: #3B275C ;
+    background-color: var(--roxo-principal) ;
 }
 
 .dropdown-menu .dropdown-item:hover{
-    background-color: #241838 ;
+    background-color: var(--roxo-escuro) ;
     color: white;
 }
 

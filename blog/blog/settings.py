@@ -131,3 +131,14 @@ MEDIA_ROOT = "{}/media".format(BASE_DIR)
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/users/login'
+
+
+#Email
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #aqui ele envia por email mesmo(Desativar no desenvolvimento)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Serve para imprimir no console a mensagem
+DEFAULT_FROM_EMAIL = 'Nome <email@gmail.com>' # Vai ser atribuido o nome da pessoa que enviou o email
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'iagoid01@gmail.com'
+# EMAIL_HOST_PASSWORD = 'senha'
+# EMAIL_PORT = 587
