@@ -30,12 +30,12 @@
                     <div class="card-body">
                         <h3 class="card-title text-center" style="color:black">Editar Perfil</h3>
 
-                        <form method="POST">
+                        <form method="POST" enctype='multipart/form-data'>
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{ next }}">
 
                             {{ form|crispy }}
-                            <button type="submit" class="btn btn-primary btn-block">Editar</button>
+                            <button type="submit" class="btn btn-block">Editar</button>
                         </form>
 
                     </div>

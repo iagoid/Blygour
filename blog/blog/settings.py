@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
     'posts',
 
     'crispy_forms',
@@ -142,3 +143,6 @@ DEFAULT_FROM_EMAIL = 'Nome <email@gmail.com>' # Vai ser atribuido o nome da pess
 # EMAIL_HOST_USER = 'iagoid01@gmail.com'
 # EMAIL_HOST_PASSWORD = 'senha'
 # EMAIL_PORT = 587
+
+# Model do usuario
+AUTH_USER_MODEL = 'users.User'

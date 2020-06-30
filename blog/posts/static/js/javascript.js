@@ -1,5 +1,5 @@
-// Função para envio de imagem na postagem
-var $input    = document.getElementById('image')
+// Função para pegar o nome da imagem
+var $input    = document.getElementById('input-file')
 var $fileName = document.getElementById('file-name')
 
 $input.addEventListener('change', function(){

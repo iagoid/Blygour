@@ -2,6 +2,7 @@
 :root {
     --roxo-principal: #3B275C;
     --roxo-escuro: #241838;
+    --roxo-claro: #5A3B8C;
 }
 
 /* Formatação padrão */
@@ -14,23 +15,37 @@ h1, h2, h3, h4, h5, h6, p{
     font-family: 'Public Sans', sans-serif;
 }
 
+a, a:hover{
+    text-decoration: none;
+}
+
 
 /* Navbar */
 .navbar.navbar-expand-lg{
     background-color: var(--roxo-principal);
-    border-radius: 0 0 4px 4px;
     border-bottom: 1px solid #2B1C42;
 }
 
+.navbar.navbar-expand-lg a:focus, .navbar.navbar-expand-lg a:hover{
+    border-radius: 8px;
+    background-color: var(--roxo-escuro);
+    outline: none;
+    box-shadow: 0px 2px 2px black;
+}
+
+.navbar-nav.mr-auto li, .navbar-nav.mr-auto form{
+    margin: 5px;
+}
+
 .navbar.navbar-expand-lg img.user-picture{
-    height: 60px;
-	width: 60px;
+    height: 50px;
+	width: 50px;
     border-radius: 50vh;
     margin-right: 15px;
 }
 
 .navbar.navbar-expand-lg .dropdown-perfil{
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -40,6 +55,7 @@ h1, h2, h3, h4, h5, h6, p{
     padding: 0;
     font-size: 32px;
     font-weight: bold;
+    padding: 5px;
 }
 
 .navbar.navbar-expand-lg .logo{
@@ -65,15 +81,17 @@ h1, h2, h3, h4, h5, h6, p{
     color: white;
 }
 
-.dropdown-menu{
-    background-color: var(--roxo-principal) ;
+.dropdown-menu.user{
+    background-color: var(--roxo-escuro);
+    border: 1px solid white;
 }
 
-.dropdown-menu .dropdown-item:hover{
-    background-color: var(--roxo-escuro) ;
+.dropdown-menu.user a:hover, .dropdown-menu.user a:focus{
     color: white;
+    border: none;
+    border-radius: 0;
+    background-color: var(--roxo-principal);
 }
-
 
 /* Corpo */
 .conteudo{
@@ -84,6 +102,17 @@ h1, h2, h3, h4, h5, h6, p{
 }
 
 /* Footer */
+.list-inline-item a{
+    padding: 5px;
+}
+
+.list-inline-item a:focus, .list-inline-item a:hover{
+    box-shadow: 0px 2px 2px black;
+    border-radius: 8px;
+    background-color: var(--roxo-principal);
+    outline: none;
+}
+
 .list-inline-item i{
     color: white;
     margin: 10px;
@@ -94,6 +123,3 @@ h1, h2, h3, h4, h5, h6, p{
 
 }
 
-.list-inline-item i:hover{
-    color: black;
-}

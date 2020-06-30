@@ -21,19 +21,41 @@ textarea{
 
 input[type='file'] {
     display: none
-  }
-  
+}
+
+.form-group.image i{
+    font-size: 20px;
+}
+
 .form-group.image label {
-    background-color: #3498db;
+    background-color: var(--roxo-principal);
     border-radius: 5px;
     color: #fff;
-    margin: 10px;
-    padding: 6px 20px
+    padding: 6px 15px;
+    margin-top: 8px;
+    border: 1px solid black;
+    font-weight: bold;
 }
-  
+
 .form-group.image label:hover {
-    background-color: #2980b9
+    background-color: var(--roxo-escuro)
 }
+
+.form-group.image input[type='submit']{
+    background-color: var(--roxo-principal);
+    border: 1px solid black;
+    color: white;
+}
+
+.form-group.image input[type='submit']:hover{
+    background-color: var(--roxo-escuro)
+}
+
+.form-group.image span{
+    margin-left: 10px;
+    color: #fff;
+}
+
 
 /* Mensagem */
 ul.messages{

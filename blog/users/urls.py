@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.conf import settings
 
 #Aqui são definidas quais URL o app user pode acessar e qual função ele chama
 app_name = 'users'

@@ -1,4 +1,4 @@
-.list-group-item{
+.list-group-item, .list-group-item:focus{
     font-size: min(18px, 3vw);
     border: 1px solid white; 
     background-color: #5A3B8C;
@@ -14,5 +14,18 @@
 
 .list-group-item:hover{
     background: var(--roxo-principal);
+    color: white;
+}
+
+/* Botão submit */
+button[type='submit']{
+    background-color: var(--roxo-principal);
+    border: 1px solid black;
+    color: white;
+    outline:none;
+}
+
+button[type='submit']:hover, button[type='submit']:focus{
+    background-color: var(--roxo-escuro);
     color: white;
 }

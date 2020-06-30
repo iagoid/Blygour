@@ -36,25 +36,27 @@ ul.messages li{
     color: white;
 }
 
+.row.user .dropdown-toggle:focus, .row.user .dropdown-toggle:hover {
+    box-shadow: 0px 2px 2px black;
+    background-color: var(--roxo-principal);
+}
+
 .row.user .dropdown-menu{
-    background-color: #9761E8;
+    background-color: var(--roxo-principal);
     border-radius: 8px;
+    box-shadow: 0px 2px 2px black;
+    
 }
+
 .row.user .dropdown-item{
-    border-radius: 4px;
+    color: white;
 }
 
-.row.user .dropdown-item:hover{
-    background-color: #7B4FBD;
-}
-
-.container.view-posts a{
-    color: black;
-}
-
-.container.view-posts a:hover{
-    color: black;
-    text-decoration: none;
+.row.user .dropdown-item:hover, .dropdown-item:focus{
+    box-shadow: 0px 2px 2px black;
+    color: white;
+    background-color: var(--roxo-escuro);
+    outline: none;
 }
 
 /* Postagem Titulo */
@@ -68,8 +70,8 @@ ul.messages li{
 .row.post{
     margin-bottom: 10px;
     margin-top: 10px;
+    box-shadow: none;
 }
-
 
 .row.post.details{
     margin-bottom: 10px;
@@ -83,6 +85,7 @@ ul.messages li{
 
 .row.post p.continue_lendo{
     font-size: max(12px, 0.5vw);
+    font-style: italic;
 }
 
 /* Postagem Imagem */
@@ -113,9 +116,11 @@ nav.pages .page-item a{
     color: #6C46A6;
     font-size: 18px;
 }
-nav.pages .page-item a:hover{
+nav.pages .page-item a:hover, nav.pages .page-item a:focus{
     background-color: #6C46A6;
     color: white;
+    box-shadow: none;
+    border: 2px solid black;
 }
 
 nav.pages .page-item.actual-page a{

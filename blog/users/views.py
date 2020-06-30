@@ -38,7 +38,7 @@ def settings(request):
 
     if request.method == 'POST':
         # Atribui ao post os dados do usuário logado
-        form = SettingsAccountForm(request.POST, instance=request.user)
+        form = SettingsAccountForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             form = SettingsAccountForm(instance=request.user)

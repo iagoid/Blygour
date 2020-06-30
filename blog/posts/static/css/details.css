@@ -30,16 +30,25 @@ ul.messages li{
     color: white;
 }
 
+.row.user .dropdown-toggle:focus, .row.user .dropdown-toggle:hover {
+    border: 1px solid white;
+    box-shadow: none;
+    background-color: var(--roxo-principal);
+}
+
 .row.user .dropdown-menu{
-    background-color: #9761E8;
+    background-color: var(--roxo-principal);
     border-radius: 8px;
+    border: 1px solid white;
 }
 .row.user .dropdown-item{
     border-radius: 4px;
+    color: white;
 }
 
 .row.user .dropdown-item:hover{
-    background-color: #7B4FBD;
+    background-color: var(--roxo-escuro);
+    color: white;
 }
 
 .container.view-posts a{
@@ -85,4 +94,5 @@ ul.messages li{
     border-radius: 6px;
     float: right;
     max-height: 75vh;
+    max-width: 55vw;
 }
