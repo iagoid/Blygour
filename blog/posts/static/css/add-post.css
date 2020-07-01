@@ -12,6 +12,13 @@ textarea{
     resize: none;
 }
 
+input[type='text']:hover, input[type='text']:focus, 
+.form-control:hover, .form-control:focus{
+    box-shadow: none;
+    border: 2px solid black;
+}
+
+/* Campo de envio de imagem */
 .form-group.image{
     display: flex;
     justify-content: space-between;
@@ -20,7 +27,7 @@ textarea{
 }
 
 input[type='file'] {
-    display: none
+    display: none;
 }
 
 .form-group.image i{
@@ -38,9 +45,10 @@ input[type='file'] {
 }
 
 .form-group.image label:hover {
-    background-color: var(--roxo-escuro)
+    background-color: var(--roxo-escuro);
 }
 
+/* Botão submit */
 .form-group.image input[type='submit']{
     background-color: var(--roxo-principal);
     border: 1px solid black;
@@ -55,7 +63,6 @@ input[type='file'] {
     margin-left: 10px;
     color: #fff;
 }
-
 
 /* Mensagem */
 ul.messages{
