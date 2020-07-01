@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {# Chama o crispy #}
@@ -11,28 +10,27 @@
     <link rel="stylesheet" href="{% static 'css/settings.css' %}">
 {% endblock styles %}
 
-
 {% block content %}
     {# offset-1 --> Centralizado nas 10 colunas #}
     <div class="container">
         {% if success %}
             <div class="alert alert-success" role="alert">
-                Sua senha foi alterada com sucesso!
+                Seu perfi foi alterado com sucesso!
             </div>
         {% endif %}
         <div class="row">
-            <div class="div col-3">
-                <ul class="list-group">
-                    <a href="{% url 'users:settings' %}" class="list-group-item list-group-item-action">Editar Conta</a>
-                    <a href="{% url 'users:edit_password' %}" class="list-group-item list-group-item-action active">Editar Senha</a>
-                </ul>
+            <div class="col-3">
+                    <ul class="list-group">
+                        <a href="{% url 'users:edit_account' %}" class="list-group-item list-group-item-action active">Editar Conta</a>
+                        <a href="{% url 'users:edit_password' %}" class="list-group-item list-group-item-action">Editar Senha</a>                      
+                    </ul>
             </div>
-            <div class="div col-9">
+            <div class="col-9">
                 <div class="card auth-card">
                     <div class="card-body">
-                        <h3 class="card-title text-center" style="color:black">Editar Senha</h3>
+                        <h3 class="card-title text-center" style="color:black">Editar Perfil</h3>
 
-                        <form method="POST">
+                        <form method="POST" enctype='multipart/form-data'>
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{ next }}">
 

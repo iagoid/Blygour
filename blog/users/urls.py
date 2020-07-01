@@ -6,7 +6,7 @@ from django.conf import settings
 app_name = 'users'
 urlpatterns = [
     path('register/', views.register, name="signup"),
-    path('settings/', views.settings, name="settings"),
+    path('settings/', views.edit_account, name="edit_account"),
     path('settings/password/', views.edit_password, name='edit_password'),
     
 ]

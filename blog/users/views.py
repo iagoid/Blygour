@@ -32,8 +32,8 @@ def register(request):
     return render(request, template_name, context)
 
 @login_required
-def settings(request):
-    template_name = 'registration/settings.html'
+def edit_account(request):
+    template_name = 'users/edit_account.html'
     context = {}
 
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def settings(request):
 
 @login_required
 def edit_password(request):
-    template_name = 'registration/edit_password.html'
+    template_name = 'users/edit_password.html'
     context = {}
 
     if request.method == 'POST':
