@@ -24,7 +24,8 @@
 
     {% for post in posts %}
         <div class="container view-posts">
-
+            
+            {% block user_informations %}
             <div class="row user">
                 <div class="col col-sm-3 col-md-2 col-lg-1">
                     {% if post.user.profile_picture %}
@@ -45,13 +46,14 @@
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Editar</a>
-                                <a class="dropdown-item" href="delete/{{ post.id }}">Excluir</a>
+                                <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">Excluir</a>
                             </div>
                         </div>
                     </div>
                 {% endif %}
-
             </div>
+            {% endblock user_informations %}
+
             <a href="posts/{{ post.id }}">
                 <div class='col-12'>
                     <div class="row title">

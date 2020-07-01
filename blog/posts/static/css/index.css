@@ -78,7 +78,6 @@ ul.messages li{
 }
 
 .row.post p{
-    margin-right: 50px;
     font-size: max(18px, 0.8vw);
     overflow-wrap: break-word;
 }
