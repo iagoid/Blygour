@@ -104,6 +104,8 @@ a, a:hover{
 /* Footer */
 .list-inline-item a{
     padding: 5px;
+    transition: 0.8s ease;
+    border-radius: 8px;
 }
 
 .list-inline-item a:focus, .list-inline-item a:hover{

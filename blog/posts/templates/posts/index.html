@@ -27,7 +27,11 @@
 
             <div class="row user">
                 <div class="col col-sm-3 col-md-2 col-lg-1">
-                    <img class='user-picture' src="/media/{{ user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                    {% if post.user.profile_picture %}
+                    <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                    {% else %}
+                    <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                    {% endif %}
                 </div>
 
                 <div class="col-6 col-sm-8 col-md-9 col-lg-10 text">

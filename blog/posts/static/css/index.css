@@ -115,12 +115,12 @@ nav.pages .page-item a{
     background-color: white;
     color: #6C46A6;
     font-size: 18px;
+    transition: 0.8s ease;
 }
 nav.pages .page-item a:hover, nav.pages .page-item a:focus{
     background-color: #6C46A6;
     color: white;
     box-shadow: none;
-    border: 2px solid black;
 }
 
 nav.pages .page-item.actual-page a{
