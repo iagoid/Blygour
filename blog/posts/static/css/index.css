@@ -1,20 +1,3 @@
-
-
-/* Mensagem */
-.container.messages{
-    margin-top: 10px;
-}
-
-ul.messages{
-    padding: 0;
-    text-align: center;
-}
-
-ul.messages li{
-    list-style: none;
-}
-
-
 /* Postagens */
 .container.view-posts{
     border: 1px solid #9761E8;

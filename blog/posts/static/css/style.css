@@ -93,6 +93,20 @@ a, a:hover{
     background-color: var(--roxo-principal);
 }
 
+/* Mensagem */
+.container.messages{
+    margin-top: 10px;
+}
+
+ul.messages{
+    padding: 0;
+    text-align: center;
+}
+
+ul.messages li{
+    list-style: none;
+}
+
 /* Corpo */
 .conteudo{
     margin-top: 10px;

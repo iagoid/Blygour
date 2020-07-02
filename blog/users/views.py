@@ -4,6 +4,8 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+
 
 
 from .forms import RegisterForm, SettingsAccountForm
@@ -42,7 +44,8 @@ def edit_account(request):
         if form.is_valid():
             form.save()
             form = SettingsAccountForm(instance=request.user)
-            context['success'] = True
+            messages.success(request, 'Conta Editada com Sucesso')
+            
     else:
         form = SettingsAccountForm(instance=request.user)
     context['form'] = form
@@ -57,7 +60,8 @@ def edit_password(request):
         form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            context['success'] = True
+            messages.success(request, 'Senha Editada com Sucesso')
+
     else:
         form = PasswordChangeForm(user=request.user)
     context['form'] = form

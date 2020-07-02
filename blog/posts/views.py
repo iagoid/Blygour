@@ -26,7 +26,7 @@ def addPost(request):
             post = form.save(commit = False)
             post.user = request.user
             post.save()
-            messages.info(request, 'Postagem Publicada com Sucesso')
+            messages.success(request, 'Postagem Publicada com Sucesso')
             return redirect('/')
 
     else:
@@ -43,5 +43,5 @@ def deletePost(request, id):
     post = get_object_or_404(Post, pk=id)
     post.delete()
 
-    messages.info(request, 'Postagem Deletada')
+    messages.success(request, 'Postagem Deletada')
     return redirect('/')

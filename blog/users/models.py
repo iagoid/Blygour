@@ -29,15 +29,15 @@ class User(AbstractUser, PermissionsMixin):
     # Usado no Cadastro do usuário
     REQUIRED_FIELDS = ['email']
 
-    def __str__(self):
-        return self.username
-
     def get_short_name(self):
         return self.username
 
     def get_full_name(self):
         return str(self)
 
+    def __str__(self):
+        return self.username
+        
     class Meta:
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
