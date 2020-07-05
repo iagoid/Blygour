@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'posts',
 
     'crispy_forms',
+    'global_permissions',
 ]
 
 MIDDLEWARE = [

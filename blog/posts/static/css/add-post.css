@@ -13,9 +13,10 @@ textarea{
 }
 
 input[type='text']:hover, input[type='text']:focus, 
-.form-control:hover, .form-control:focus{
+textarea:hover, textarea:focus{
     box-shadow: none;
     border: 2px solid black;
+    outline: none;
 }
 
 /* Campo de envio de imagem */

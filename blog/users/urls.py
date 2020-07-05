@@ -8,7 +8,6 @@ urlpatterns = [
     path('register/', views.register, name="signup"),
     path('settings/', views.edit_account, name="edit_account"),
     path('settings/password/', views.edit_password, name='edit_password'),
-    
 ]
 
 #localhost:8000 / URL do Arquivo Principal / essa URL

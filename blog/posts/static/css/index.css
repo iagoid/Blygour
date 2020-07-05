@@ -1,41 +1,58 @@
+/* Padrão */
+h1, h2, h3, h4, h5, h6, p{
+    text-shadow: 1px 1px 1px black;
+}
+
 /* Postagens */
-.container.view-posts{
+.container.view-posts {
     border: 1px solid #9761E8;
     margin-top: 5px;
 }
 
-.row.user{
+.row.user {
     margin-bottom: 10px;
     margin-top: 15px;
 }
 
-.row.user img.user-picture{
+.row.user img.user-picture {
     height: 70px;
-	width: 70px;
-	border-radius: 50vh;
+    width: 70px;
+    border-radius: 50vh;
 }
 
-.row.user .dropdown-toggle{
+/* Nome usuario */
+a.user{
     color: white;
 }
 
-.row.user .dropdown-toggle:focus, .row.user .dropdown-toggle:hover {
+a.user:hover{
+    text-decoration: underline;
+}
+
+/* Menu de opções */
+.row.user .dropdown-toggle {
+    color: white;
+}
+
+.row.user .dropdown-toggle:focus,
+.row.user .dropdown-toggle:hover {
     box-shadow: 0px 2px 2px black;
     background-color: var(--roxo-principal);
 }
 
-.row.user .dropdown-menu{
+.row.user .dropdown-menu {
     background-color: var(--roxo-principal);
     border-radius: 8px;
     box-shadow: 0px 2px 2px black;
-    
+
 }
 
-.row.user .dropdown-item{
+.row.user .dropdown-item {
     color: white;
 }
 
-.row.user .dropdown-item:hover, .dropdown-item:focus{
+.row.user .dropdown-item:hover,
+.dropdown-item:focus {
     box-shadow: 0px 2px 2px black;
     color: white;
     background-color: var(--roxo-escuro);
@@ -43,49 +60,58 @@
 }
 
 /* Postagem Titulo */
-.container.view-posts .row.title h2{
+.container.view-posts .row.title h2 {
     text-align: center;
     font-size: max(24px, 1vw);
     overflow-wrap: break-word;
 }
 
 /*Postagem Texto */
-.row.post{
+.row.post {
     margin-bottom: 10px;
     margin-top: 10px;
     box-shadow: none;
 }
 
-.row.post.details{
+.row.post.details {
     margin-bottom: 10px;
 }
 
-.row.post p{
+.row.post p {
     font-size: max(18px, 0.8vw);
     overflow-wrap: break-word;
 }
 
-.row.post p.continue_lendo{
+.row.post p.continue_lendo {
     font-size: max(12px, 0.5vw);
     font-style: italic;
 }
 
 /* Postagem Imagem */
-.row.post #div-image{
+.row.post #div-image {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.row.post img{
+.row.post img {
     border-radius: 6px;
     width: 30vw;
     float: right;
     max-height: 75vh;
 }
 
+/* Imagem no details */
+.row.post .img-thumbnail.details{
+    transition: 1s;
+}
+
+.row.post .img-thumbnail.details:hover {
+    transform: scale(1.2);
+}
+
 /* Pagination */
-nav.pages{
+nav.pages {
     margin-top: 15px;
     display: flex;
     align-items: center;
@@ -93,19 +119,21 @@ nav.pages{
 }
 
 
-nav.pages .page-item a{
+nav.pages .page-item a {
     background-color: white;
     color: #6C46A6;
     font-size: 18px;
     transition: 0.8s ease;
 }
-nav.pages .page-item a:hover, nav.pages .page-item a:focus{
+
+nav.pages .page-item a:hover,
+nav.pages .page-item a:focus {
     background-color: #6C46A6;
     color: white;
     box-shadow: none;
 }
 
-nav.pages .page-item.actual-page a{
+nav.pages .page-item.actual-page a {
     background-color: #492F70;
     color: white;
 }

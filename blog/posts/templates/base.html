@@ -81,12 +81,12 @@
                                 {% if user.profile_picture %}
                                 <img class='user-picture' src="/media/{{ user.profile_picture }}" alt="Profile Picture {{ post.user }}"><span class="dropdown-perfil">{{ user }}</span>
                                 {% else %}
-                                <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture"><span class="dropdown-perfil">{{ user }}</span>
+                                <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture"><span class="dropdown-perfil">{{ user.username }}</span>
                                 {% endif %}
                             </a>
                             
                             <div class="dropdown-menu user" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Meu Perfil</a>
+                                <a class="dropdown-item" href="{% url 'posts:profile_user' user.username %}">Meu Perfil</a>
                                 <a class="dropdown-item" href="{% url 'users:edit_account' %}">Configurações</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>

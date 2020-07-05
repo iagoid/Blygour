@@ -19,17 +19,15 @@
             {% block user_informations %}
             <div class="row user">
                 <div class="col col-sm-3 col-md-2 col-lg-1">
-                    <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>
                     {% if post.user.profile_picture %}
                     <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
                     {% else %}
                     <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
                     {% endif %}
-                    </a>
                 </div>
 
                 <div class="col-6 col-sm-8 col-md-9 col-lg-10 text">
-                    <h5><a href="{% url 'posts:profile_user' post.user.username %}" class='user'>{{ post.user }}</a></h5>
+                    <h5>{{ post.user }}</h5>
                 </div>
 
                 {% if user.is_authenticated %}
@@ -39,7 +37,7 @@
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             {% if user == post.user %}
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{% url 'posts:edit-post' post.id %}">Editar</a>
+                                <a class="dropdown-item" href="#">Editar</a>
                                 <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">Excluir</a>
                             </div>
                             {% else %}
@@ -47,6 +45,7 @@
                                 <a class="dropdown-item" href="#">Denunciar</a>
                             </div>
                             {% endif %}
+
                         </div>
                     </div>
                 {% endif %}

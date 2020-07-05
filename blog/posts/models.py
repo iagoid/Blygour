@@ -29,3 +29,4 @@ class Post(models.Model):
         verbose_name = 'Postagem'
         verbose_name_plural = 'Postagens'
         ordering = ['text']
+        
