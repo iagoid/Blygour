@@ -22,6 +22,9 @@ class User(AbstractUser, PermissionsMixin):
     is_superuser = models.BooleanField('É super Usuário?', blank=True, default=False)
     date_joined = models.DateField('Data de Entrada', auto_now_add=True)
 
+    first_name = None
+    last_name = None
+
     objects = UserManager()
 
     # Usado no campo login

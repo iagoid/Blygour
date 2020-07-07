@@ -50,29 +50,41 @@ def editPost(request, id):
     #Deixa o formulário preenchido com os dado criados
     form = PostForm(instance=post)
 
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES, instance=post)
-        # Faz a verificação do formulário
-        if form.is_valid():
-            post.user = request.user
-            post.save()
-            messages.success(request, 'Postagem Editada com Sucesso')
-            return redirect('/') 
-        
+    if post.user == request.user:
+
+        if request.method == 'POST':
+            form = PostForm(request.POST, request.FILES, instance=post)
+            # Faz a verificação do formulário
+            if form.is_valid():
+                post.user = request.user
+                post.save()
+                messages.success(request, 'Postagem Editada com Sucesso')
+                return redirect('/') 
+            
+            else:
+                return render(request,'posts/edit_post.html', {'form': form, 'post': post})
+
         else:
             return render(request,'posts/edit_post.html', {'form': form, 'post': post})
 
     else:
-        return render(request,'posts/edit_post.html', {'form': form, 'post': post})
+        messages.warning(request, 'Você não tem permissão para fazer isso')
+        return redirect('/') 
 
 
 @login_required
 def deletePost(request, id):
     post = get_object_or_404(Post, pk=id)
-    post.delete()
+    if post.user == request.user:
+        post.delete()
 
-    messages.success(request, 'Postagem Deletada')
-    return redirect('/')
+        messages.success(request, 'Postagem Deletada')
+        return redirect('/')
+
+    else:
+        messages.warning(request, 'Você não tem permissão para fazer isso')
+        return redirect('/') 
+
 
 def profile_user(request, username):
     user = get_object_or_404(User, username = username)

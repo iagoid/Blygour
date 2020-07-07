@@ -13,7 +13,7 @@ textarea{
 }
 
 input[type='text']:hover, input[type='text']:focus, 
-textarea:hover, textarea:focus{
+#id_text:hover, #id_text:focus{
     box-shadow: none;
     border: 2px solid black;
     outline: none;
