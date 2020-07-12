@@ -30,3 +30,34 @@ class Post(models.Model):
         verbose_name_plural = 'Postagens'
         ordering = ['text']
         
+class Comments(models.Model):
+    user = models.ForeignKey(get_user_model(), verbose_name='Usuário', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, verbose_name='Post', on_delete=models.CASCADE)
+    comment = models.TextField('Texto da Postagem')
+
+    created_at = models.DateTimeField('Criado em :', auto_now_add = True)
+    updated_at = models.DateTimeField('Modificado em :', auto_now = True)
+
+    def __str__(self):
+        return self.comment
+
+    class Meta:
+        verbose_name = 'Comentário'
+        verbose_name_plural = 'Comentários'
+        ordering = ['created_at']
+
+class CommentsAnswer(models.Model):
+    user = models.ForeignKey(get_user_model(), verbose_name='Usuário', on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comments, verbose_name='Comentário', on_delete=models.CASCADE)
+    answer = models.TextField('Texto da Postagem')
+
+    created_at = models.DateTimeField('Criado em :', auto_now_add = True)
+    updated_at = models.DateTimeField('Modificado em :', auto_now = True)
+
+    def __str__(self):
+        return self.answer
+
+    class Meta:
+        verbose_name = 'Resposta ao comentário'
+        verbose_name_plural = 'Respostas ao comentário'
+        ordering = ['created_at']

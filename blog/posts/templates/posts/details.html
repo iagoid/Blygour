@@ -1,18 +1,19 @@
 {% extends 'posts/index.html' %}
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
     Página Inicial
 {% endblock title %}
 
 {% block content %}
 
-    <div class="container view-posts details">
+    <div class="container view-posts">
 
         {% block user_informations %}
             {{ block.super }}
         {% endblock user_informations %}
-
 
         <div class="row title">
             <div class="col-1"></div>
@@ -31,12 +32,87 @@
                 {% endif %}
                 {{ post.text|linebreaks}}
             </div>
-            
+        </div>
+        <div class="col-1"></div>
+
+        <div class="row">
+            <div class="col-12">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="field">
+                        {{ form.comment }}
+                    </div>
+
+                    <input type="submit" class="btn btn-lg btn-block" value="Enviar">
+
+                </form>
+            </div>
         </div>
 
-        <div class="col-1"></div>
-    </div>
+        {% for comment in comments %}
+            <div class="row user comments">
+                <div>
+                    <a href="{% url 'posts:profile_user' comment.post.user.username %}" class='user'>
+                        <img class='user-picture' src="/media/{{ comment.user.profile_picture }}" alt="Profile Picture {{ comment.user }}">
+                    </a>
+                </div>
 
-</div>
+                <div class="col">
+                    <h5>
+                        <a href="{% url 'posts:profile_user' comment.post.user.username %}" class='user'>{{ comment.post.user }}</a>
+                    </h5>
+                    <h6 class="data-update">{{ comment.updated_at|date:"d M Y" }}</h6>
+                    {{ comment.comment }}
+                    <h5>
+                        <a class="btn" id="answer-button">
+                            <i class="fas fa-heart">Curtir</i>
+                        </a>
+                        <a class="btn" id="answer-button" onclick="AparecerResposta('{{ comment.id }}')"> 
+                            <i class="fas fa-comment" >Reponder</i>
+                        </a>
+                    </h5>
+                    <div class="row" id="{{ comment.id }}" hidden>
+                        <div class="col-11">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                <div class="field">
+                                    {{ formAnswer.answer }}
+                                </div>
+
+                                <input type="submit" class="btn btn-lg btn-block" value="Enviar">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% for answer in answers %}
+                {% if answer.comment == comment %}
+                    <div class="row user answers">
+                        <div class="col-1"></div>
+                        <div>
+                            <a href="{% url 'posts:profile_user' answer.comment.post.user.username %}" class='user'>
+                                <img class='user-picture' src="/media/{{ answer.comment.user.profile_picture }}" alt="Profile Picture {{ comment.user }}">
+                            </a>
+                        </div>
+
+                        <div class="col">
+                            <h5>
+                                <a href="{% url 'posts:profile_user' answer.comment.post.user.username %}" class='user'>{{ answer.comment.post.user }}</a>
+                            </h5>
+                            <h6 class="data-update">{{ answer.updated_at|date:"d M Y" }}</h6>
+                            {{ answer.answer }}
+                        </div>
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+
+        {% endfor %}
+
+    </div>
 
 {% endblock content %}

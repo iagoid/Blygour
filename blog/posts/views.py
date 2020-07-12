@@ -5,8 +5,8 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
 from users.models import User
-from .forms import PostForm
-from .models import Post
+from .forms import PostForm, CommentsForm, CommentsAnswerForm
+from .models import Post, Comments, CommentsAnswer
 
 def postsList(request):
     posts_list = Post.objects.all().order_by('-created_at')
@@ -36,12 +36,41 @@ def addPost(request):
         return render(request, 'posts/add-post.html', {'form': form})
         
 
+# Detalhes dos posts
 def viewPost(request, id):
     post = get_object_or_404(Post, pk=id)
-    context = {
-        'post': post
-    }
-    return render(request, 'posts/details.html', context)
+    comments = Comments.objects.all().order_by('-created_at').filter(post = post)
+    answers = CommentsAnswer.objects.all().order_by('created_at').filter(comment__pk__in = comments)
+    
+    if request.method == 'POST':
+        form = CommentsForm(request.POST or None)
+        formAnswer =  CommentsAnswerForm(request.POST or None)
+        if form.is_valid():
+            comment = form.save(commit = False)
+            comment.user = request.user
+            comment.post = post
+            comment.save()
+            messages.success(request, 'Comentário enviado com Sucesso')
+            return redirect('posts:posts-view', id=post.id)
+        elif formAnswer.is_valid():
+            answer = formAnswer.save(commit = False)
+            answer.user = request.user
+            answer.comment = comments
+            answer.save()
+            messages.success(request, 'Resposta enviada com Sucesso')
+            return redirect('posts:posts-view', id=post.id)
+    else:
+        form = CommentsForm(request.POST)
+        formAnswer = CommentsAnswerForm(request.POST)
+        
+        context = {
+            'post': post,
+            'comments': comments,
+            'answers': answers,
+            'form': form,
+            'formAnswer': formAnswer,
+        }
+        return render(request, 'posts/details.html', context)
 
 # Edit das tarefas
 @login_required 

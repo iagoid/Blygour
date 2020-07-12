@@ -1,10 +1,9 @@
 from django import forms
 from django.forms.widgets import ClearableFileInput
 
-from .models import Post
+from .models import Post, Comments, CommentsAnswer
 
 class PostForm(forms.ModelForm):
-    
     
     class Meta:
         model = Post
@@ -36,3 +35,29 @@ class PostForm(forms.ModelForm):
                 'required': 'Este campo é obrigatório'
             }
         }
+
+class CommentsForm(forms.ModelForm):
+
+    widgets = {
+            'text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite aqui o seu comentário',
+            }),
+        }
+
+    class Meta:
+        model = Comments
+        fields = ('comment',)
+
+class CommentsAnswerForm(forms.ModelForm):
+
+    widgets = {
+            'answer': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite aqui sua resposta',
+            }),
+        }
+
+    class Meta:
+        model = CommentsAnswer
+        fields = ('answer',)

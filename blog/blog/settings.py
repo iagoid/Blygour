@@ -131,6 +131,8 @@ MEDIA_ROOT = "{}/media".format(BASE_DIR)
 
 #Deixa o formulário no padrão do bootstrap
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Redirecionamentos do Login
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/users/login'
 

@@ -18,6 +18,7 @@ h1, h2, h3, h4, h5, h6, p{
     height: 70px;
     width: 70px;
     border-radius: 50vh;
+    margin-left: 10px;
 }
 
 /* Nome usuario */
@@ -25,8 +26,27 @@ a.user{
     color: white;
 }
 
-a.user:hover{
-    text-decoration: underline;
+/* Data da postagem */
+.data-update{
+    font-size: 15px;    
+}
+
+/* Comentários */
+.row.user.comments {
+    border-top: 1px solid #9761E8;
+    padding-top: 15px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+.row.user.answers {
+    padding-top: 15px;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+.comments-actions i, .comments i{
+    justify-content: center;
+    margin-right: 25px;
 }
 
 /* Menu de opções */
@@ -60,24 +80,20 @@ a.user:hover{
 }
 
 /* Postagem Titulo */
-.container.view-posts .row.title h2 {
+.container.view-posts .title h2 {
     text-align: center;
     font-size: max(24px, 1vw);
     overflow-wrap: break-word;
 }
 
 /*Postagem Texto */
-.row.post {
+.container.view-posts .post {
     margin-bottom: 10px;
     margin-top: 10px;
     box-shadow: none;
 }
 
-.row.post.details {
-    margin-bottom: 10px;
-}
-
-.row.post p {
+.container.view-posts .post p {
     font-size: max(18px, 0.8vw);
     overflow-wrap: break-word;
 }
@@ -106,10 +122,6 @@ a.user:hover{
     transition: 1s;
 }
 
-.row.post .img-thumbnail.details:hover {
-    transform: scale(1.2);
-}
-
 /* Pagination */
 nav.pages {
     margin-top: 15px;
@@ -117,7 +129,6 @@ nav.pages {
     align-items: center;
     justify-content: center;
 }
-
 
 nav.pages .page-item a {
     background-color: white;
@@ -136,4 +147,8 @@ nav.pages .page-item a:focus {
 nav.pages .page-item.actual-page a {
     background-color: #492F70;
     color: white;
+}
+
+textarea{
+    width: 100%;
 }

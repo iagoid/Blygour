@@ -18,7 +18,7 @@
             
             {% block user_informations %}
             <div class="row user">
-                <div class="col col-sm-3 col-md-2 col-lg-1">
+                <div>
                     {% if post.user.profile_picture %}
                     <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
                     {% else %}
@@ -26,8 +26,12 @@
                     {% endif %}
                 </div>
 
-                <div class="col-6 col-sm-8 col-md-9 col-lg-10 text">
-                    <h5>{{ post.user }}</h5>
+                <div class="col">
+                        <h5>
+                            <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>{{ post.user }}</a>
+                        </h5>
+                        <h6 class="data-update">Atualizado em:
+                            {{ post.updated_at|date:"d M Y" }}</h6>
                 </div>
 
                 {% if user.is_authenticated %}
