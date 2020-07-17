@@ -53,6 +53,7 @@
         {% for comment in comments %}
             <div class="row user comments">
                 <div>
+                    <a href="{% url 'posts:profile_user' comment.user.username %}" class='user'>
                     {% if comment.user.profile_picture %}
                         <img class='user-picture' src="/media/{{ comment.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
                     {% else %}
@@ -63,9 +64,11 @@
 
                 <div class="col">
                     <h5>
-                        <a href="{% url 'posts:profile_user' comment.user.username %}" class='user'>{{ comment.user }}</a>
+                        {{ comment.user }}</a>
                     </h5>
+                    </a>
                     <h6 class="data-update">{{ comment.updated_at }}</h6>
+
                     {{ comment.comment }}
                     <h5>
                         <a class="btn" id="answer-button">

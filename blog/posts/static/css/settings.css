@@ -1,3 +1,7 @@
+.fas{
+    margin-right: 10px;
+}
+
 .list-group-item, .list-group-item:focus{
     font-size: min(18px, 3vw);
     border: 1px solid white; 

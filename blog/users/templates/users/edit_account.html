@@ -15,10 +15,16 @@
     <div class="container">
         <div class="row">
             <div class="col-3">
-                    <ul class="list-group">
-                        <a href="{% url 'users:edit_account' %}" class="list-group-item list-group-item-action active">Editar Conta</a>
-                        <a href="{% url 'users:edit_password' %}" class="list-group-item list-group-item-action">Editar Senha</a>                      
-                    </ul>
+                <ul class="list-group">
+                    <a href="{% url 'users:edit_account' %}" class="list-group-item list-group-item-action active">
+                        <i class="fas fa-user"></i>Editar Conta
+                    </a>
+
+                    <a href="{% url 'users:edit_password' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-lock"></i>Editar Senha
+                    </a>
+
+                </ul>
             </div>
             <div class="col-9">
                 <div class="card auth-card">
