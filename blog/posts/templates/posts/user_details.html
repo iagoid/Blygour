@@ -15,45 +15,45 @@
 
     {% for post in posts %}
         <div class="container view-posts">
-            
-            {% block user_informations %}
-            <div class="row user">
-                <div>
-                    {% if post.user.profile_picture %}
-                    <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
-                    {% else %}
-                    <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
-                    {% endif %}
-                </div>
 
-                <div class="col">
+            {% block user_informations %}
+                <div class="row user">
+                    <div>
+                        {% if post.user.profile_picture %}
+                            <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                        {% else %}
+                            <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                        {% endif %}
+                    </div>
+
+                    <div class="col">
                         <h5>
                             <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>{{ post.user }}</a>
                         </h5>
                         <h6 class="data-update">Atualizado em:
                             {{ post.updated_at|date:"d M Y" }}</h6>
-                </div>
-
-                {% if user.is_authenticated %}
-                    <div class="col-2 col-sm-1 col-md-1 col-lg-1">
-
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                            {% if user == post.user %}
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Editar</a>
-                                <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">Excluir</a>
-                            </div>
-                            {% else %}
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Denunciar</a>
-                            </div>
-                            {% endif %}
-
-                        </div>
                     </div>
-                {% endif %}
-            </div>
+
+                    {% if user.is_authenticated %}
+                        <div class="col-2 col-sm-1 col-md-1 col-lg-1">
+
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                {% if user == post.user %}
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Editar</a>
+                                        <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">Excluir</a>
+                                    </div>
+                                {% else %}
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Denunciar</a>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
             {% endblock user_informations %}
 
             <a href="{% url 'posts:posts-view' post.id %}">
@@ -74,9 +74,8 @@
                                 <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
                             {% endif %}
 
-                            {{ post.text|slice:"0:500"|linebreaks }}
+                            {{ post.text|truncatechars:"750"|linebreaks }}
 
-                            <p class='continue_lendo'>Clique para continuar lendo</p>
                         </div>
                     </div>
 

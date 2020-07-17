@@ -94,7 +94,7 @@ a, a:hover{
 }
 
 /* Mensagem */
-.container.messages{
+.messages{
     margin-top: 10px;
 }
 
@@ -111,7 +111,7 @@ ul.messages li{
 .conteudo{
     margin-top: 10px;
 }
-.conteudo .container.view-posts{
+.conteudo .view-posts{
     background-image: linear-gradient(to right, #523680, #5A3B8C, #523680);
 }
 

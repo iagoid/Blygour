@@ -78,9 +78,8 @@
                                 <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
                             {% endif %}
 
-                            {{ post.text|slice:":700"|linebreaks }}
+                            {{ post.text|truncatechars:"750"|linebreaks }}
 
-                            <p class='continue_lendo'>Clique para continuar lendo</p>
                         </div>
                     </div>
 

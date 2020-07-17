@@ -20,11 +20,9 @@
         </title>
         <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@700&display=swap" rel="stylesheet">
 
-
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        
+
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        
 
         {% block styles %}{% endblock styles %}
 
@@ -49,7 +47,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'posts:add-post' %}">Publicar</a>
                             </li>
-                            {% else %}
+                        {% else %}
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Publicar</a>
                             </li>
@@ -75,23 +73,25 @@
                     </ul>
                     <ul class="navbar-nav">
                         {% if user.is_authenticated%}
-                        <li class="nav-item dropdown">
-                            
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {% if user.profile_picture %}
-                                <img class='user-picture' src="/media/{{ user.profile_picture }}" alt="Profile Picture {{ post.user }}"><span class="dropdown-perfil">{{ user }}</span>
-                                {% else %}
-                                <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture"><span class="dropdown-perfil">{{ user.username }}</span>
-                                {% endif %}
-                            </a>
-                            
-                            <div class="dropdown-menu user" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'posts:profile_user' user.username %}">Meu Perfil</a>
-                                <a class="dropdown-item" href="{% url 'users:edit_account' %}">Configurações</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
-                            </div>
-                        </li>
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {% if user.profile_picture %}
+                                        <img class='user-picture' src="/media/{{ request.user.profile_picture }}" alt="Profile Picture {{ request.user }}">
+                                        <span class="dropdown-perfil">{{ request.user }}</span>
+                                    {% else %}
+                                        <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                                        <span class="dropdown-perfil">{{ request.user }}</span>
+                                    {% endif %}
+                                </a>
+
+                                <div class="dropdown-menu user" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'posts:profile_user' user.username %}">Meu Perfil</a>
+                                    <a class="dropdown-item" href="{% url 'users:edit_account' %}">Configurações</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+                                </div>
+                            </li>
                         {% else %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -99,20 +99,20 @@
                         {% endif %}
                     </ul>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
 
         <div class="container messages">
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li {% if message.tags %} class='alert alert-{{ message.tags }}' {% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class='alert alert-{{ message.tags }}' {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
 
-        <div class="conteudo">
+        <div class="container conteudo">
             {% block content %}{% endblock content %}
         </div>
 

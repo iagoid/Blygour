@@ -4,7 +4,7 @@ h1, h2, h3, h4, h5, h6, p{
 }
 
 /* Postagens */
-.container.view-posts {
+.view-posts {
     border: 1px solid #9761E8;
     margin-top: 5px;
 }
@@ -80,27 +80,22 @@ a.user{
 }
 
 /* Postagem Titulo */
-.container.view-posts .title h2 {
+.view-posts .title h2 {
     text-align: center;
     font-size: max(24px, 1vw);
     overflow-wrap: break-word;
 }
 
 /*Postagem Texto */
-.container.view-posts .post {
+.view-posts .post {
     margin-bottom: 10px;
     margin-top: 10px;
     box-shadow: none;
 }
 
-.container.view-posts .post p {
+.view-posts .post p {
     font-size: max(18px, 0.8vw);
     overflow-wrap: break-word;
-}
-
-.row.post p.continue_lendo {
-    font-size: max(12px, 0.5vw);
-    font-style: italic;
 }
 
 /* Postagem Imagem */

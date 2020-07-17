@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <h4 class="card-title text-center" style="color:black">Se Registrar no Blygour</h4>
 
-                    <form method="post">
+                    <form method="post"  enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ next }}">
 

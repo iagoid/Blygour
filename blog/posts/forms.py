@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.widgets import ClearableFileInput
 
-from .models import Post, Comments, CommentsAnswer
+from .models import Post, Comments
 
 class PostForm(forms.ModelForm):
     
@@ -49,15 +49,3 @@ class CommentsForm(forms.ModelForm):
         model = Comments
         fields = ('comment',)
 
-class CommentsAnswerForm(forms.ModelForm):
-
-    widgets = {
-            'answer': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Digite aqui sua resposta',
-            }),
-        }
-
-    class Meta:
-        model = CommentsAnswer
-        fields = ('answer',)

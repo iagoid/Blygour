@@ -1,9 +1,9 @@
 /* Formulário de postagens */
-.container.postagem{
+.postagem{
     border: 1px solid #9761E8;
 }
 
-.container.postagem .field{
+.postagem .field{
     margin-top: 10px;
 }
 

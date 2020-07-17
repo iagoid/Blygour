@@ -17,7 +17,7 @@ class Post(models.Model):
     text = models.TextField('Texto da Postagem')
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True)
     #Salva a imagem com um nome randomizado
-    image = models.FileField(upload_to = get_file_path, verbose_name='Imagem', null=True, blank=True)
+    image = models.ImageField(upload_to = get_file_path, verbose_name='Imagem', null=True, blank=True)
 
     created_at = models.DateTimeField('Criado em :', auto_now_add = True)
     updated_at = models.DateTimeField('Modificado em :', auto_now = True)
@@ -44,20 +44,4 @@ class Comments(models.Model):
     class Meta:
         verbose_name = 'Comentário'
         verbose_name_plural = 'Comentários'
-        ordering = ['created_at']
-
-class CommentsAnswer(models.Model):
-    user = models.ForeignKey(get_user_model(), verbose_name='Usuário', on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comments, verbose_name='Comentário', on_delete=models.CASCADE)
-    answer = models.TextField('Texto da Postagem')
-
-    created_at = models.DateTimeField('Criado em :', auto_now_add = True)
-    updated_at = models.DateTimeField('Modificado em :', auto_now = True)
-
-    def __str__(self):
-        return self.answer
-
-    class Meta:
-        verbose_name = 'Resposta ao comentário'
-        verbose_name_plural = 'Respostas ao comentário'
         ordering = ['created_at']
