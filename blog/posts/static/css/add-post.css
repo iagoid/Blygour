@@ -1,9 +1,9 @@
 /* Formulário de postagens */
-.postagem{
+.container.postagem{
     border: 1px solid #9761E8;
 }
 
-.postagem .field{
+.container.postagem .field{
     margin-top: 10px;
 }
 
@@ -60,7 +60,7 @@ input[type='submit']:hover, input[type='submit']:focus{
     background-color: var(--roxo-escuro);
     color: white;
     box-shadow: 0px 2px 2px black;
-    border: 1px solid black;)
+    border: 1px solid black;
 }
 
 .form-group.image span{

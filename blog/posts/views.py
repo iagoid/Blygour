@@ -9,14 +9,24 @@ from .forms import PostForm, CommentsForm
 from .models import Post, Comments
 
 def postsList(request):
-    posts_list = Post.objects.all().order_by('-created_at')
+    search = request.GET.get('search')
+
+    if search:
+        posts_list = Post.objects.filter(title__icontains=search)
+    
+    else:
+        posts_list = Post.objects.all().order_by('-created_at')
 
     paginator = Paginator(posts_list, 7)
     page = request.GET.get('page')
 
     posts = paginator.get_page(page)
-    
-    return render(request, 'posts/index.html', {'posts': posts})
+
+    context = {
+        'posts': posts,
+    }
+        
+    return render(request, 'posts/index.html', context)
 
 @login_required
 def addPost(request):

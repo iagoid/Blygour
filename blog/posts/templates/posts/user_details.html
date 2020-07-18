@@ -83,8 +83,14 @@
                 </div>
             </a>
         </div>
-
+        {% empty %}
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <h1>{{ user }} ainda não publicou nada.</h1>
+            </div>
+        </div>
     {% endfor %}
+
 </div>
 {# Fecha a div da base #}
 

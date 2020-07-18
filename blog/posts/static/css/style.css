@@ -33,6 +33,33 @@ a, a:hover{
     box-shadow: 0px 2px 2px black;
 }
 
+#search{
+    border-radius: 8px;
+    outline: none;
+}
+
+/* Pesquisa */
+#search:focus{
+    border-radius: 8px;
+    box-shadow: 0px 2px 2px black;
+    outline: none;
+    border: 2px solid black;
+}
+
+button[type='submit'], button[type='submit']:hover{
+    background-color: var(--roxo-principal);
+    color: white;
+    outline:none;
+    border: none;
+}
+
+button[type='submit']:hover, button[type='submit']:focus{
+    background-color: var(--roxo-escuro);
+    color: white;
+    box-shadow: 0px 2px 2px black;
+}
+
+/* Resto naavbar */
 .navbar-nav.mr-auto li, .navbar-nav.mr-auto form{
     margin: 5px;
 }

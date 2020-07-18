@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block title %}
     Página Inicial
 {% endblock title %}
@@ -44,12 +43,18 @@
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                 {% if user == post.user %}
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{% url 'posts:edit-post' post.id %}">Editar</a>
-                                        <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">Excluir</a>
+                                        <a class="dropdown-item" href="{% url 'posts:edit-post' post.id %}">
+                                            <i class="fas fa-edit"></i>
+                                            Editar</a>
+                                        <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">
+                                            <i class="fas fa-trash"></i>
+                                            Excluir</a>
                                     </div>
                                 {% else %}
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Denunciar</a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-ban"></i>
+                                            Denunciar</a>
                                     </div>
                                 {% endif %}
                             </div>
@@ -64,9 +69,11 @@
                         <div class="col-1"></div>
 
                         <div class="col-10">
-                            <h2>{{ post.title|upper }}</h2>
+                            <h2>
+                                <strong>{{ post.title|upper }}</strong>
+                            </h2>
                         </div>
-                        
+
                         <div class="col-1"></div>
                     </div>
 
