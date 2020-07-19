@@ -12,21 +12,29 @@ def postsList(request):
     search = request.GET.get('search')
 
     if search:
-        posts_list = Post.objects.filter(title__icontains=search)
-    
+        posts = Post.objects.filter(title__icontains=search)
+        users = User.objects.filter(username__icontains=search)
+
+        context = {
+            'posts': posts,
+            'users': users,
+            'search': search,
+        }
+        return render(request, 'posts/search.html', context)
+
     else:
         posts_list = Post.objects.all().order_by('-created_at')
 
-    paginator = Paginator(posts_list, 7)
-    page = request.GET.get('page')
+        paginator = Paginator(posts_list, 7)
+        page = request.GET.get('page')
 
-    posts = paginator.get_page(page)
+        posts = paginator.get_page(page)
 
-    context = {
-        'posts': posts,
-    }
-        
-    return render(request, 'posts/index.html', context)
+        context = {
+            'posts': posts,
+        }
+            
+        return render(request, 'posts/index.html', context)
 
 @login_required
 def addPost(request):
@@ -114,7 +122,7 @@ def deletePost(request, id):
         return redirect('/') 
 
 
-def profile_user(request, username):
+def profileUser(request, username):
     user = get_object_or_404(User, username = username)
     template_name = 'posts/user_details.html'
 

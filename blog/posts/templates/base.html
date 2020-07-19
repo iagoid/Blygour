@@ -36,9 +36,7 @@
                 <a class="navbar-nav blygour" href="{% url 'posts:posts-list' %}">BLYGOUR</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">
                         <i class="fas fa-bars"></i>
-                    </span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -53,11 +51,10 @@
                             </li>
                         {% endif %}
 
-                        <form class="form-inline my-2 my-lg-0" method='GET'>
+                        <form class="form-inline my-2 my-lg-0 form-search" method='GET'>
                             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Titulo " id="search", name="search" value="{{ request.GET.search }}">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                                <i class="fas fa-search"></i>
-                                
+                            <button class="btn my-2 my-sm-0 button-search"  type="submit">
+                                <i class="fas fa-search" id="search-icon"></i>
                             </button>
                         </form>
 

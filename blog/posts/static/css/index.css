@@ -3,6 +3,14 @@ h1, h2, h3, h4, h5, h6, p{
     text-shadow: 1px 1px 1px black;
 }
 
+/* Pesquisa */
+.text-search{
+    margin-bottom: 10px;
+}
+.text-center{
+    margin-top: 10px;
+}
+
 /* Postagens */
 .view-posts {
     border: 1px solid white;

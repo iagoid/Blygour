@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Página Inicial
+{% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/add-post.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock styles %}
+
+{% block content %}
+    <h1 class="text-center text-search">{{ search }}</h1>
+    <div class="container view-posts">
+
+        <div class="row  text-center">
+            {% for user in users %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="{% url 'posts:profile_user' user.username %}">
+                        {% if user.profile_picture %}
+                            <img class='img-thumbnail' style="height:250px" src="/media/{{ user.profile_picture }}" alt="Profile Picture {{ user.username }}">
+                        {% else %}
+                            <img class='img-thumbnail' style="height:250px" src="/media/profiles/avatar.png" alt="Default profile picture">
+                        {% endif %}
+                        <h4>{{ user.username }}</h4>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% for post in posts %}
+        <div class="container view-posts">
+
+            {% block user_informations %}
+                <div class="row user">
+                    <div>
+                        <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>
+                            {% if post.user.profile_picture %}
+                                <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                            {% else %}
+                                <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                            {% endif %}
+                        </a>
+                    </div>
+
+                    <div class="col">
+                        <h5>
+                            <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>{{ post.user }}</a>
+                        </h5>
+                        <h6 class="data-update">Atualizado em:
+                            {{ post.updated_at|date:"d M Y" }}</h6>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                        <div class="col-2 col-sm-1 col-md-1 col-lg-1">
+
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                {% if user == post.user %}
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{% url 'posts:edit-post' post.id %}">
+                                            <i class="fas fa-edit"></i>
+                                            Editar</a>
+                                        <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">
+                                            <i class="fas fa-trash"></i>
+                                            Excluir</a>
+                                    </div>
+                                {% else %}
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-ban"></i>
+                                            Denunciar</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endblock user_informations %}
+
+            <a href="{% url 'posts:posts-view' post.id %}">
+                <div class='col-12'>
+                    <div class="row title">
+                        <div class="col-1"></div>
+
+                        <div class="col-10">
+                            <h2>
+                                <strong>{{ post.title|upper }}</strong>
+                            </h2>
+                        </div>
+
+                        <div class="col-1"></div>
+                    </div>
+
+                    <div class="row post">
+                        <div class="col-1"></div>
+
+                        <div class="col-10">
+                            {% if post.image %}
+                                <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
+                            {% endif %}
+
+                            {{ post.text|truncatechars:"750"|linebreaks }}
+
+                        </div>
+                    </div>
+
+                    <div class="col-1"></div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+
+    {% if not users and not posts %}
+        <div class="container">
+            <h2>Parece que não existe nenhuma postagem ou usuário chamado
+                <b>{{ search }}</b>, por favor tente uma combinação diferente.</h2>
+        </div>
+    {% endif %}
+
+</div>
+{# Fecha a div da base #}
+
+<div class="container">
+    <nav class='pages'>
+        <ul class="pagination">
+
+            {# Páginação anterior #}
+            {% if posts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
+                </li>
+
+            {% endif %}
+
+            {# Paginação atual #}
+            {% if posts.paginator.num_pages %}
+                <li class="page-item actual-page">
+                    <a class="page-link" href="?page={{ posts.number }}">{{ posts.number }}</a>
+                </li>
+            {% endif %}
+
+            {# Paginação posterior #}
+            {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>
+{% endblock content %}
