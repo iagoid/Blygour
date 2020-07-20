@@ -3,7 +3,9 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, UserManager
 from django.utils.crypto import get_random_string
+from django.utils.html import mark_safe
 import os
+
 
 def get_file_path(instance, filename):
     # Pega a extenção do arquivp
@@ -31,6 +33,12 @@ class User(AbstractUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     # Usado no Cadastro do usuário
     REQUIRED_FIELDS = ['email']
+
+    @property
+    def admin_photo(self):
+        return mark_safe('<img src="{}" width="200px" />'.format(self.profile_picture.url))
+        self.admin_photo.short_description = "Imagem Postagem"
+        self.admin_photo.allow_tags = True
 
     def get_short_name(self):
         return self.username

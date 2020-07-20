@@ -26,7 +26,7 @@ class Post(models.Model):
 
     @property
     def view_image(self):
-        return mark_safe('<img src="%s" width="400px" />'%self.image.url)
+        return mark_safe('<img src="{}" width="400px" />'.format(self.image.url))
         self.view_image.short_description = "Imagem Postagem"
         self.view_image.allow_tags = True
 
