@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.utils.crypto import get_random_string
+from django.utils.html import mark_safe
 import os
+
 
 def get_file_path(instance, filename):
     #Pega a extensão do arquivo, pelo ultimo ponto (.png, jpg)
@@ -21,6 +23,12 @@ class Post(models.Model):
 
     created_at = models.DateTimeField('Criado em :', auto_now_add = True)
     updated_at = models.DateTimeField('Modificado em :', auto_now = True)
+
+    @property
+    def view_image(self):
+        return mark_safe('<img src="%s" width="400px" />'%self.image.url)
+        self.view_image.short_description = "Imagem Postagem"
+        self.view_image.allow_tags = True
 
     def __str__(self):
         return self.text
