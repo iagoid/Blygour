@@ -54,14 +54,14 @@ a, a:hover{
     border: none;
 }
 
-button[type='submit']{
+.search-button{
     background-color: transparent;
     color: var(--roxo-principal);
     outline:none;
     border: none;
 }
 
-button[type='submit']:hover, button[type='submit']:focus{
+.search-button:hover, butto.search-button:focus{
     background-color: transparent;
     color: var(--roxo-principal);
     box-shadow: none;
