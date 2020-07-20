@@ -40,12 +40,12 @@ input[type='password']:hover, input[type='password']:focus{
 }
 
 /* Botão submit */
-.btn-edit{
+.btn-submit{
     background-color: var(--roxo-principal);
     color: white;
 }
 
-.btn-edit:hover, .btn-edit:focus{
+.btn-submit:hover, .btn-submit:focus{
     background-color: var(--roxo-escuro);
     color: white;
     box-shadow: 0px 2px 2px black;

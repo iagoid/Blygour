@@ -7,6 +7,7 @@
 {% block title %}Entrar Na Rede Social Aleatória{% endblock title %}
 
 {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock styles %}
 
@@ -14,7 +15,7 @@
     {# offset-1 --> Centralizado nas 10 colunas #}
     <div class="container-fluid login">
     <div class="row">
-        <div class="div col-md-4 offset-md-4">
+        <div class="div col-md-6 offset-md-3">
             <div class="card auth-card">
                 <div class="card-body">
                     <h4 class="card-title text-center" style="color:black">Entrar no Blygour</h4>
@@ -24,9 +25,9 @@
                         <input type="hidden" name="next" value="{{ next }}">
 
                         {{ form|crispy }}
-                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                        <button type="submit" class="btn btn-submit btn-block">Entrar</button>
                     </form>
-                    <p class='change-form-p'><a href="{% url 'users:signup' %}"> Não possui uma conta? Clique Aqui </a></p>
+                    <a href="{% url 'users:signup' %}"> Não possui uma conta? Clique Aqui </a>
 
                 </div>
             </div>

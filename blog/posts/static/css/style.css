@@ -175,6 +175,10 @@ a.user{
     font-size: 12px;    
 }
 
+.btn-comment{
+    margin-bottom: 10px;
+}
+
 /* Comentários */
 .row.user.comments {
     border-top: 1px solid #9761E8;
