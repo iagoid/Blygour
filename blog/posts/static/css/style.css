@@ -15,10 +15,21 @@ h1, h2, h3, h4, h5, h6, p{
     font-family: 'Public Sans', sans-serif;
 }
 
-a, a:hover{
+a, a:hover, a:focus{
     text-decoration: none;
+    box-shadow: none;
+    border: none;
+    outline: none;
 }
 
+input, input:hover, input:focus,
+.btn, .btn:hover, .btn:focus,
+.form-control, .form-control:hover, .form-control:focus{
+    box-shadow: none;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+}
 
 /* Navbar */
 .navbar.navbar-expand-lg{
@@ -33,11 +44,6 @@ a, a:hover{
     box-shadow: 0px 2px 2px black;
 }
 
-#search{
-    border-radius: 8px;
-    outline: none;
-}
-
 /* Pesquisa */
 .form-search {
     border-radius: 8px;
@@ -48,35 +54,14 @@ a, a:hover{
     box-shadow: 0px 2px 2px black;
 }
 
-#search, #search:focus{
-    box-shadow: none;
-    outline: none;
-    border: none;
-}
-
 .search-button{
-    background-color: transparent;
     color: var(--roxo-principal);
-    outline:none;
-    border: none;
 }
 
-.search-button:hover, butto.search-button:focus{
-    background-color: transparent;
-    color: var(--roxo-principal);
-    box-shadow: none;
-}
-
-.button-search:active #search-icon{
-    background-color: none;
-    border: none;
-}
-
-button[type='submit']:hover #search-icon, button[type='submit']:focus #search-icon{
+.search-button:hover #search-icon, .search-button:focus #search-icon{
     animation: shake 1.5s;
     animation-iteration-count: infinite;
 }
-
 
 /* Resto naavbar */
 .navbar-nav.mr-auto li, .navbar-nav.mr-auto form{
@@ -128,7 +113,6 @@ button[type='submit']:hover #search-icon, button[type='submit']:focus #search-ic
 
 .dropdown-menu.user a:hover, .dropdown-menu.user a:focus{
     color: white;
-    border: none;
     border-radius: 0;
     background-color: var(--roxo-principal);
 }
