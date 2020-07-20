@@ -44,7 +44,7 @@
                         {{ form.comment }}
                     </div>
 
-                    <input type="submit" class="btn btn-lg btn-block" value="Enviar">
+                    <input type="submit" class="btn btn-block" value="Enviar">
 
                 </form>
             </div>
@@ -69,12 +69,12 @@
                     </a>
                     <h6 class="data-update">{{ comment.updated_at }}</h6>
 
-                    {{ comment.comment }}
+                    <p>{{ comment.comment }}</p>
                     <h5>
-                        <a class="btn" id="answer-button">
+                        <a class="btn">
                             <i class="fas fa-heart">Curtir</i>
                         </a>
-                        <a class="btn" id="answer-button" onclick="AparecerResposta('{{ comment.id }}')">
+                        <a class="btn" onclick="AparecerResposta('{{ comment.id }}')">
                             <i class="fas fa-comment">Reponder</i>
                         </a>
                     </h5>

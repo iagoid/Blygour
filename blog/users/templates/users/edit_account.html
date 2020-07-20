@@ -14,7 +14,7 @@
     {# offset-1 --> Centralizado nas 10 colunas #}
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-sm-12 col-md-3 settings-menu">
                 <ul class="list-group">
                     <a href="{% url 'users:edit_account' %}" class="list-group-item list-group-item-action active">
                         <i class="fas fa-user"></i>Editar Conta
@@ -26,7 +26,7 @@
 
                 </ul>
             </div>
-            <div class="col-9">
+            <div class="col-sm-12 col-md-9">
                 <div class="card auth-card">
                     <div class="card-body">
                         <h3 class="card-title text-center" style="color:black">Editar Perfil</h3>
@@ -36,7 +36,7 @@
                             <input type="hidden" name="next" value="{{ next }}">
 
                             {{ form|crispy }}
-                            <button type="submit" class="btn btn-block">Editar</button>
+                            <button type="submit" class="btn btn-block btn-edit">Editar</button>
                         </form>
 
                     </div>
