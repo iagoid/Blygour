@@ -7,6 +7,10 @@
     margin-top: 10px;
 }
 
+#input-tags{
+    margin-top: 15px;
+}
+
 textarea{
     margin-top: 15px;
     resize: none;

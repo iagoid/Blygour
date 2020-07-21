@@ -10,6 +10,7 @@ from .models import Post, Comments
 
 def postsList(request):
     search = request.GET.get('search')
+    
     tags = Post.tags.all()
 
     model = Post
@@ -40,12 +41,7 @@ def postsList(request):
         }
             
         return render(request, 'posts/index.html', context)
-    
-    def get_context_data(self, **kwargs):
-        context = super(postsList, self).get_context_data(**kwargs)
-        context['tags'] = Post.tags.all()
-        return 
-        
+            
 @login_required
 def addPost(request):
 
@@ -56,6 +52,7 @@ def addPost(request):
             post = form.save(commit = False)
             post.user = request.user
             post.save()
+            form.save_m2m()
             messages.success(request, 'Postagem Publicada com Sucesso')
             return redirect('/')
 

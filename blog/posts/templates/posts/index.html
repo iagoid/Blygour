@@ -85,7 +85,7 @@
 
                             {{ post.text|truncatechars:"750"|linebreaks }}
 
-                            {% for tag in tags %}
+                            {% for tag in post.tags.all %}
                                 <a href="" class="tags">
                                     <button type="button" class="btn btn-secondary btn-sm">
                                         <i class="fa fa-tag">{{ tag.slug }}</i>

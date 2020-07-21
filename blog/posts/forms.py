@@ -25,6 +25,11 @@ class PostForm(forms.ModelForm):
                 'id': 'input-file',
 
             }),
+            'tags': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Tags (Separadas por vírgula)',
+                'id': 'input-tags'
+            }),
         }
 
         image = forms.ImageField(widget = ClearableFileInput)
