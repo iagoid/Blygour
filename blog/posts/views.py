@@ -10,6 +10,9 @@ from .models import Post, Comments
 
 def postsList(request):
     search = request.GET.get('search')
+    tags = Post.tags.all()
+
+    model = Post
 
     if search:
         posts = Post.objects.filter(title__icontains=search)
@@ -19,6 +22,7 @@ def postsList(request):
             'posts': posts,
             'users': users,
             'search': search,
+            'tags': tags,
         }
         return render(request, 'posts/search.html', context)
 
@@ -32,10 +36,16 @@ def postsList(request):
 
         context = {
             'posts': posts,
+            'tags': tags,
         }
             
         return render(request, 'posts/index.html', context)
-
+    
+    def get_context_data(self, **kwargs):
+        context = super(postsList, self).get_context_data(**kwargs)
+        context['tags'] = Post.tags.all()
+        return 
+        
 @login_required
 def addPost(request):
 

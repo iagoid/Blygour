@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'posts',
 
+    'taggit',
     'crispy_forms',
     'global_permissions',
 ]

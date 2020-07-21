@@ -85,70 +85,77 @@
 
                             {{ post.text|truncatechars:"750"|linebreaks }}
 
+                            {% for tag in tags %}
+                                <a href="" class="tags">
+                                    <button type="button" class="btn btn-secondary btn-sm">
+                                        <i class="fa fa-tag">{{ tag.slug }}</i>
+                                    </button>
+                            {% endfor %}
+
                         </div>
                     </div>
 
                     <div class="col-1"></div>
-                </div>
-            </a>
-        </div>
+                    </div>
+                </a>
+            </div>
 
-    {% endfor %}
-</div>
-{# Fecha a div da base #}
+        {% endfor %}
+    </div>
+    {# Fecha a div da base #}
 
-<div class="container">
-    <nav class='pages'>
-        <ul class="pagination">
+    <div class="container">
+        <nav class='pages'>
+            <ul class="pagination">
 
-            {# Páginação anterior #}
-            {% if posts.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1">
-                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-                    </a>
-                </li>
+                {# Páginação anterior #}
+                {% if posts.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">
+                            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
 
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.previous_page_number }}">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    </a>
-                </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.previous_page_number }}">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
 
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
-                </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
+                    </li>
 
-            {% endif %}
+                {% endif %}
 
-            {# Paginação atual #}
-            {% if posts.paginator.num_pages %}
-                <li class="page-item actual-page">
-                    <a class="page-link" href="?page={{ posts.number }}">{{ posts.number }}</a>
-                </li>
-            {% endif %}
+                {# Paginação atual #}
+                {% if posts.paginator.num_pages %}
+                    <li class="page-item actual-page">
+                        <a class="page-link" href="?page={{ posts.number }}">{{ posts.number }}</a>
+                    </li>
+                {% endif %}
 
-            {# Paginação posterior #}
-            {% if posts.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
-                </li>
+                {# Paginação posterior #}
+                {% if posts.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
+                    </li>
 
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-                </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
 
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
-                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    </a>
-                </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
 
-            {% endif %}
+                {% endif %}
 
-        </ul>
-    </nav>
-</div>
+            </ul>
+        </nav>
+    </div>
 {% endblock content %}
