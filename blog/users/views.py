@@ -1,18 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.core.paginator import Paginator
+from posts.utils import generate_hash_key
 
-
-from .models import User
 from posts.models import Post
 
-
-from .forms import RegisterForm, SettingsAccountForm
+from .models import User, PasswordReset
+from .forms import RegisterForm, SettingsAccountForm, PasswordResetForm
 
 def register(request):
     template_name = 'registration/register.html'
@@ -36,6 +35,30 @@ def register(request):
     }
 
     return render(request, template_name, context)
+
+def password_reset(request):
+    template_name='users/password_reset.html'
+    context = {}
+    form = PasswordResetForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Um email foi enviado para você')
+        context['success'] = True
+    context['form'] = form
+    return render(request, template_name, context)
+
+def password_reset_confirm(request, key):
+    template_name='users/password_reset_confirm.html'
+    context = {}
+    reset = get_object_or_404(PasswordReset, key=key)
+    form = SetPasswordForm(user=reset.user, data=request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Sua senha foi trocada com sucesso')
+        context['success'] = True
+    context['form'] = form
+    return render(request, template_name, context)
+
 
 @login_required
 def edit_account(request):

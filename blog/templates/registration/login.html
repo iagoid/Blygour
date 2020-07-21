@@ -4,7 +4,7 @@
 {# Chama o crispy #}
 {% load crispy_forms_tags %}
 
-{% block title %}Entrar Na Rede Social Aleatória{% endblock title %}
+{% block title %}Entrar No Blygour{% endblock title %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/settings.css' %}">
@@ -27,6 +27,7 @@
                         {{ form|crispy }}
                         <button type="submit" class="btn btn-submit btn-block">Entrar</button>
                     </form>
+                    <a href="{% url 'users:password_reset' %}"> Esqueceu sua senha? Clique Aqui </a><br>
                     <a href="{% url 'users:signup' %}"> Não possui uma conta? Clique Aqui </a>
 
                 </div>

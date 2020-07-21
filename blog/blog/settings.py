@@ -147,5 +147,6 @@ DEFAULT_FROM_EMAIL = 'Nome <email@gmail.com>' # Vai ser atribuido o nome da pess
 # EMAIL_HOST_PASSWORD = 'senha'
 # EMAIL_PORT = 587
 
+
 # Model do usuario
 AUTH_USER_MODEL = 'users.User'
