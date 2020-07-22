@@ -107,6 +107,14 @@
 
                             {{ post.text|truncatechars:"750"|linebreaks }}
 
+                            {% for tag in post.tags.all %}
+                                <a href="{% url 'posts:index_tagged' tag.slug %}" class="tags">
+                                    <button type="button" class="btn btn-secondary btn-sm">
+                                        <i class="fa fa-tag">{{ tag.slug }}</i>
+                                    </button>
+                                </a>
+                            {% endfor %}
+
                         </div>
                     </div>
 

@@ -8,7 +8,7 @@ from users.models import User
 from .forms import PostForm, CommentsForm
 from .models import Post, Comments
 
-def postsList(request):
+def postsList(request, tag=None):
     search = request.GET.get('search')
     
     tags = Post.tags.all()
@@ -17,6 +17,7 @@ def postsList(request):
 
     if search:
         posts = Post.objects.filter(title__icontains=search)
+
         users = User.objects.filter(username__icontains=search)
 
         context = {
@@ -28,7 +29,12 @@ def postsList(request):
         return render(request, 'posts/search.html', context)
 
     else:
-        posts_list = Post.objects.all().order_by('-created_at')
+        # Se foi passado o parametro tag
+        if tag:
+            posts_list = Post.objects.all().filter(tags__slug__icontains=tag)
+
+        else:
+            posts_list = Post.objects.all().order_by('-created_at')
 
         paginator = Paginator(posts_list, 7)
         page = request.GET.get('page')
@@ -41,6 +47,8 @@ def postsList(request):
         }
             
         return render(request, 'posts/index.html', context)
+
+        
             
 @login_required
 def addPost(request):
