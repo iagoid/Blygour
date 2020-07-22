@@ -3,6 +3,10 @@
 
 {% load crispy_forms_tags %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/add-post.css' %}">
+{% endblock styles %}
+
 {% block title %}
     {{ post.title|title }}
 {% endblock title %}
@@ -16,24 +20,31 @@
         {% endblock user_informations %}
 
         <div class="row title">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <h2>{{ post.title|upper }}</h2>
+            <div class="col-12">
+                <h2>
+                    <strong>{{ post.title|upper }}</strong>
+                </h2>
             </div>
-            <div class="col-1"></div>
         </div>
 
         <div class="row post">
-            <div class="col-1"></div>
-
-            <div class="col-10">
+            <div class="col-12">
                 {% if post.image %}
-                    <img src="/media/{{ post.image }}" class="img-thumbnail details" alt="{{ post.title }}">
+                    <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
                 {% endif %}
-                {{ post.text|linebreaks}}
+
+                {{ post.text|linebreaks }}
+
+                {% for tag in post.tags.all %}
+                    <a href="{% url 'posts:index_tagged' tag.slug %}" class="tags">
+                        <button type="button" class="btn btn-secondary btn-sm button-tags">
+                            <i class="fa fa-tag tags-text">{{ tag.slug }}</i>
+                        </button>
+                    </a>
+                {% endfor %}
+
             </div>
         </div>
-        <div class="col-1"></div>
 
         <div class="row">
             <div class="col-12">
@@ -54,33 +65,33 @@
             <div class="row user comments">
                 <div>
                     <a href="{% url 'posts:profile_user' comment.user.username %}" class='user'>
-                    {% if comment.user.profile_picture %}
-                        <img class='user-picture' src="/media/{{ comment.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
-                    {% else %}
-                        <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
-                    {% endif %}
+                        {% if comment.user.profile_picture %}
+                            <img class='user-picture' src="/media/{{ comment.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                        {% else %}
+                            <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                        {% endif %}
 
-                </div>
+                    </div>
 
-                <div class="col">
-                    <h5>
-                        {{ comment.user }}</a>
+                    <div class="col">
+                        <h5>
+                            {{ comment.user }}</a>
                     </h5>
+                </a>
+                <h6 class="data-update">{{ comment.updated_at }}</h6>
+
+                <p>{{ comment.comment }}</p>
+                <h5>
+                    <a class="btn">
+                        <i class="fas fa-heart">Curtir</i>
                     </a>
-                    <h6 class="data-update">{{ comment.updated_at }}</h6>
-
-                    <p>{{ comment.comment }}</p>
-                    <h5>
-                        <a class="btn">
-                            <i class="fas fa-heart">Curtir</i>
-                        </a>
-                        <a class="btn" onclick="AparecerResposta('{{ comment.id }}')">
-                            <i class="fas fa-comment">Reponder</i>
-                        </a>
-                    </h5>
-                </div>
+                    <a class="btn" onclick="AparecerResposta('{{ comment.id }}')">
+                        <i class="fas fa-comment">Reponder</i>
+                    </a>
+                </h5>
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock content %}

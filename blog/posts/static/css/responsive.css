@@ -2,7 +2,7 @@
     /* Imagem Postagem */
     .row.post img{
         border-radius: 6px;
-        width:80vw;
+        width:100vw;
         max-height: 100vh;
     }
  }

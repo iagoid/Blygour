@@ -27,6 +27,7 @@ class PostForm(forms.ModelForm):
             }),
             'tags': forms.TextInput(attrs={
                 'class': 'form-control',
+                'maxlength': 50,
                 'placeholder': 'Tags (Separadas por vírgula)',
                 'id': 'input-tags'
             }),

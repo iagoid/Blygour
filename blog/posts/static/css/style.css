@@ -222,10 +222,8 @@ a.user{
     outline: none;
 }
 
-/* Postagem Titulo */
 .view-posts .title {
     text-align: center;
-    font-size: max(24px, 1vw);
     overflow-wrap: break-word;
 }
 
@@ -238,6 +236,7 @@ a.user{
 .view-posts .post p {
     font-size: max(18px, 0.8vw);
     overflow-wrap: break-word;
+    text-align: justify;
 }
 
 /* Postagem Imagem */
@@ -252,8 +251,18 @@ a.user{
     width: 30vw;
     float: right;
     max-height: 75vh;
+    margin: 5px;
 }
 
+/* Tags */
+.tags-text{
+    font-size: 15px;
+    word-break: break-all;
+}
+
+.button-tags{
+    margin: 3px;
+}
 
 /* Pagination */
 nav.pages {

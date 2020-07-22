@@ -34,7 +34,7 @@
                 <a class="navbar-nav blygour" href="{% url 'posts:posts-list' %}">BLYGOUR</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
+                    <i class="fas fa-bars"></i>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -50,8 +50,8 @@
                         {% endif %}
 
                         <form action="{% url 'posts:posts-list' %}" class="form-inline my-2 my-lg-0 form-search" method='GET'>
-                            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Titulo " id="search-input", name="search" value="{{ request.GET.search }}">
-                            <button class="btn button-search search-button"  type="submit">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Titulo " id="search-input" ,="," name="search" value="{{ request.GET.search }}">
+                            <button class="btn button-search search-button" type="submit">
                                 <i class="fas fa-search" id="search-icon"></i>
                             </button>
                         </form>
@@ -112,6 +112,61 @@
 
         <div class="container conteudo">
             {% block content %}{% endblock content %}
+
+            {% block pagination %}
+                <nav class='pages'>
+                    <ul class="pagination">
+
+                        {# Páginação anterior #}
+                        {% if posts.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">
+                                    <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ posts.previous_page_number }}">
+                                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
+                            </li>
+
+                        {% endif %}
+
+                        {# Paginação atual #}
+                        {% if posts.paginator.num_pages %}
+                            <li class="page-item actual-page">
+                                <a class="page-link" href="?page={{ posts.number }}">{{ posts.number }}</a>
+                            </li>
+                        {% endif %}
+
+                        {# Paginação posterior #}
+                        {% if posts.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                        {% endif %}
+
+                    </ul>
+                </nav>
+            {% endblock pagination %}
         </div>
 
         <!-- Footer -->
