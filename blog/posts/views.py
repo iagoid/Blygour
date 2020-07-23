@@ -4,6 +4,9 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
+from taggit.models import Tag
+
+
 from users.models import User
 from .forms import PostForm, CommentsForm
 from .models import Post, Comments
@@ -16,9 +19,11 @@ def postsList(request, tag=None):
     model = Post
 
     if search:
-        posts = Post.objects.filter(title__icontains=search)
+
+        posts = Post.objects.order_by('-created_at').filter(title__icontains=search)
 
         users = User.objects.filter(username__icontains=search)
+        template_name = 'posts/search.html'
 
         context = {
             'posts': posts,
@@ -26,7 +31,7 @@ def postsList(request, tag=None):
             'search': search,
             'tags': tags,
         }
-        return render(request, 'posts/search.html', context)
+        return render(request,template_name, context)
 
     else:
         # Se foi passado o parametro tag
@@ -98,29 +103,42 @@ def viewPost(request, id):
 @login_required 
 def editPost(request, id):
     post = get_object_or_404(Post, pk=id)
+
+    tags = post.tags.all()
+    # tag_list = []
+    # for tag in tags:
+    #     tag_list.append(tag.slug)
     #Deixa o formulário preenchido com os dado criados
     form = PostForm(instance=post)
+    # form.tags = tag_list
 
-    if post.user == request.user:
+    if post.user != request.user:
+        messages.warning(request, 'Você não tem permissão para fazer isso')
+        return redirect('/') 
 
-        if request.method == 'POST':
-            form = PostForm(request.POST, request.FILES, instance=post)
-            # Faz a verificação do formulário
-            if form.is_valid():
-                post.user = request.user
-                post.save()
-                messages.success(request, 'Postagem Editada com Sucesso')
-                return redirect('/') 
-            
-            else:
-                return render(request,'posts/edit_post.html', {'form': form, 'post': post})
-
+    if request.method == 'POST' or None:
+        form = PostForm(request.POST, request.FILES, instance=post)
+        
+        # Faz a verificação do formulário
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            # post.tag = tag_list
+            post.save()
+            # messages.warning(request,  tag_list)
+            # messages.warning(request,  post.tag)
+            messages.success(request, 'Postagem Editada com Sucesso')
+            return redirect('/')
+        
         else:
+            # messages.warning(request, 'Erro ao editar')
+            messages.warning(request,  tag_list)
+            messages.warning(request,  post)
             return render(request,'posts/edit_post.html', {'form': form, 'post': post})
 
     else:
-        messages.warning(request, 'Você não tem permissão para fazer isso')
-        return redirect('/') 
+        return render(request,'posts/edit_post.html', {'form': form, 'post': post})
+
 
 
 @login_required

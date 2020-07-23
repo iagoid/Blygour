@@ -19,6 +19,9 @@
             <div class="field">
                 {{ form.title }}
                 {{ form.text }}
+                {{ form.tags }}
+                {# <input type="text" name="tags" data-role="tagsinput" class="form-control" id="tags" name="tags" value="{% for tag in post.tags.all %}{{ tag }},{% endfor %}"> #}
+
             </div>
 
             <div class='form-group image'>

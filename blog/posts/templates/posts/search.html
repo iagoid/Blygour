@@ -102,9 +102,9 @@
                         {{ post.text|truncatechars:"650"|linebreaks }}
 
                         {% for tag in post.tags.all %}
-                            <a href="{% url 'posts:index_tagged' tag.slug %}" class="tags">
+                            <a href="{% url 'posts:index_tagged' tag|title %}" class="tags">
                                 <button type="button" class="btn btn-secondary btn-sm button-tags">
-                                    <i class="fa fa-tag tags-text">{{ tag.slug }}</i>
+                                    <i class="fa fa-tag tags-text">{{ tag|title }}</i>
                                 </button>
                             </a>
                         {% endfor %}

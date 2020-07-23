@@ -19,19 +19,23 @@
             {% block user_informations %}
                 <div class="row user">
                     <div>
-                        {% if post.user.profile_picture %}
-                            <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
-                        {% else %}
-                            <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
-                        {% endif %}
+                        <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>
+                            {% if post.user.profile_picture %}
+                                <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                            {% else %}
+                                <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                            {% endif %}
+                        </a>
                     </div>
 
                     <div class="col">
                         <h5>
                             <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>{{ post.user }}</a>
                         </h5>
+
                         <h6 class="data-update">Atualizado em:
                             {{ post.updated_at|date:"d M Y" }}</h6>
+
                     </div>
 
                     {% if user.is_authenticated %}
@@ -41,15 +45,20 @@
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                 {% if user == post.user %}
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Editar</a>
-                                        <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">Excluir</a>
+                                        <a class="dropdown-item" href="{% url 'posts:edit-post' post.id %}">
+                                            <i class="fas fa-edit"></i>
+                                            Editar</a>
+                                        <a class="dropdown-item" href="{% url 'posts:delete-post' post.id %} ">
+                                            <i class="fas fa-trash"></i>
+                                            Excluir</a>
                                     </div>
                                 {% else %}
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Denunciar</a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-ban"></i>
+                                            Denunciar</a>
                                     </div>
                                 {% endif %}
-
                             </div>
                         </div>
                     {% endif %}
@@ -57,30 +66,33 @@
             {% endblock user_informations %}
 
             <a href="{% url 'posts:posts-view' post.id %}">
-                <div class='col-12'>
-                    <div class="row title">
-                        <div class="col-1"></div>
-                        <div class="col-10">
-                            <h2>{{ post.title|upper }}</h2>
-                        </div>
-                        <div class="col-1"></div>
+                <div class="row title">
+                    <div class="col-12">
+                        <h2>
+                            <strong>{{ post.title|upper }}</strong>
+                        </h2>
                     </div>
-
-                    <div class="row post">
-                        <div class="col-1"></div>
-
-                        <div class="col-10">
-                            {% if post.image %}
-                                <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
-                            {% endif %}
-
-                            {{ post.text|truncatechars:"750"|linebreaks }}
-
-                        </div>
-                    </div>
-
-                    <div class="col-1"></div>
                 </div>
+
+                <div class="row post">
+                    <div class="col-12">
+                        {% if post.image %}
+                            <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
+                        {% endif %}
+
+                        {{ post.text|truncatechars:"650"|linebreaks }}
+
+                        {% for tag in post.tags.all %}
+                            <a href="{% url 'posts:index_tagged' tag|title %}" class="tags">
+                                <button type="button" class="btn btn-secondary btn-sm button-tags">
+                                    <i class="fa fa-tag tags-text">{{ tag|title }}</i>
+                                </button>
+                            </a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
             </a>
         </div>
         {% empty %}
@@ -91,61 +103,4 @@
         </div>
     {% endfor %}
 
-</div>
-{# Fecha a div da base #}
-
-<div class="container">
-    <nav class='pages'>
-        <ul class="pagination">
-
-            {# Páginação anterior #}
-            {% if posts.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1">
-                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-                    </a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.previous_page_number }}">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    </a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
-                </li>
-
-            {% endif %}
-
-            {# Paginação atual #}
-            {% if posts.paginator.num_pages %}
-                <li class="page-item actual-page">
-                    <a class="page-link" href="?page={{ posts.number }}">{{ posts.number }}</a>
-                </li>
-            {% endif %}
-
-            {# Paginação posterior #}
-            {% if posts.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.paginator.num_pages }}" aria-label="Last">
-                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    </a>
-                </li>
-
-            {% endif %}
-
-        </ul>
-    </nav>
-</div>
 {% endblock content %}

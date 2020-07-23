@@ -1,5 +1,7 @@
 from django import forms
 from django.forms.widgets import ClearableFileInput
+from taggit.forms import TagWidget
+
 
 from .models import Post, Comments
 
@@ -25,7 +27,7 @@ class PostForm(forms.ModelForm):
                 'id': 'input-file',
 
             }),
-            'tags': forms.TextInput(attrs={
+            'tags': TagWidget(attrs={
                 'class': 'form-control',
                 'maxlength': 50,
                 'placeholder': 'Tags (Separadas por vírgula)',

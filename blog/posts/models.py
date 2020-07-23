@@ -22,7 +22,7 @@ class Post(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True)
     #Salva a imagem com um nome randomizado
     image = models.ImageField(upload_to = get_file_path, verbose_name='Imagem', null=True, blank=True)
-    tags = TaggableManager()
+    tags = TaggableManager(help_text="Suas tags")
 
     created_at = models.DateTimeField('Criado em :', auto_now_add = True)
     updated_at = models.DateTimeField('Modificado em :', auto_now = True)
