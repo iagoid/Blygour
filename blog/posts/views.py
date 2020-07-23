@@ -105,12 +105,7 @@ def editPost(request, id):
     post = get_object_or_404(Post, pk=id)
 
     tags = post.tags.all()
-    # tag_list = []
-    # for tag in tags:
-    #     tag_list.append(tag.slug)
-    #Deixa o formulário preenchido com os dado criados
     form = PostForm(instance=post)
-    # form.tags = tag_list
 
     if post.user != request.user:
         messages.warning(request, 'Você não tem permissão para fazer isso')
@@ -123,17 +118,13 @@ def editPost(request, id):
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
-            # post.tag = tag_list
             post.save()
-            # messages.warning(request,  tag_list)
-            # messages.warning(request,  post.tag)
+            form.save_m2m()
             messages.success(request, 'Postagem Editada com Sucesso')
             return redirect('/')
         
         else:
-            # messages.warning(request, 'Erro ao editar')
-            messages.warning(request,  tag_list)
-            messages.warning(request,  post)
+            messages.warning(request, 'Erro ao editar')
             return render(request,'posts/edit_post.html', {'form': form, 'post': post})
 
     else:
