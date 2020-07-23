@@ -44,6 +44,13 @@ class PostForm(forms.ModelForm):
             }
         }
 
+    def clean_tags(self):
+        list_tags = self.cleaned_data.get('tags', None)
+        if list_tags:
+            list_tags = [tags.lower() for tags in list_tags]
+
+        return list_tags
+
 class CommentsForm(forms.ModelForm):
 
     widgets = {

@@ -36,7 +36,7 @@ def postsList(request, tag=None):
     else:
         # Se foi passado o parametro tag
         if tag:
-            posts_list = Post.objects.all().filter(tags__slug__icontains=tag)
+            posts_list = Post.objects.all().filter(tags__slug__icontains=tag).order_by('-created_at')
 
         else:
             posts_list = Post.objects.all().order_by('-created_at')
@@ -52,8 +52,6 @@ def postsList(request, tag=None):
         }
             
         return render(request, 'posts/index.html', context)
-
-        
             
 @login_required
 def addPost(request):
@@ -76,6 +74,7 @@ def addPost(request):
 
 # Detalhes dos posts
 def viewPost(request, id):
+    template_name = 'posts/details.html'
     post = get_object_or_404(Post, pk=id)
     comments = Comments.objects.all().order_by('-created_at').filter(post = post)
     
@@ -97,12 +96,14 @@ def viewPost(request, id):
             'comments': comments,
             'form': form,
         }
-        return render(request, 'posts/details.html', context)
+        return render(request, template_name, context)
 
 # Edit das tarefas
 @login_required 
 def editPost(request, id):
     post = get_object_or_404(Post, pk=id)
+    template_name = 'posts/edit_post.html'
+    context = {}
 
     tags = post.tags.all()
     form = PostForm(instance=post)
@@ -111,9 +112,13 @@ def editPost(request, id):
         messages.warning(request, 'Você não tem permissão para fazer isso')
         return redirect('/') 
 
+    context['post'] = post
+    context['form'] = form
+
     if request.method == 'POST' or None:
         form = PostForm(request.POST, request.FILES, instance=post)
-        
+        context['form'] = form
+
         # Faz a verificação do formulário
         if form.is_valid():
             post = form.save(commit=False)
@@ -125,26 +130,22 @@ def editPost(request, id):
         
         else:
             messages.warning(request, 'Erro ao editar')
-            return render(request,'posts/edit_post.html', {'form': form, 'post': post})
+            return render(request, template_name, context)
 
     else:
-        return render(request,'posts/edit_post.html', {'form': form, 'post': post})
-
-
+        return render(request,'posts/edit_post.html', context)
 
 @login_required
 def deletePost(request, id):
     post = get_object_or_404(Post, pk=id)
     if post.user == request.user:
         post.delete()
-
         messages.success(request, 'Postagem Deletada')
         return redirect('/')
 
     else:
         messages.warning(request, 'Você não tem permissão para fazer isso')
         return redirect('/') 
-
 
 def profileUser(request, username):
     user = get_object_or_404(User, username = username)

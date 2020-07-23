@@ -62,8 +62,8 @@
                             </a>
                             <div class="dropdown-menu user" aria-labelledby="navbarDropdown">
                                 {% for tag in tags.all %}
-                                    <a href="{% url 'posts:index_tagged' tag.slug %}" class="dropdown-item">
-                                        {{ tag.slug|slice:"20" }}
+                                    <a href="{% url 'posts:index_tagged' tag %}" class="dropdown-item">
+                                        {{ tag.name|slice:"10" }}
                                     </a>
                                 {% endfor %}
                             </div>
