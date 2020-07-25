@@ -3,8 +3,8 @@ Aprendendo Django desenvolvendo um site por conta própria esta foi minha primei
 
 
 Clone o arquivo entre pelo terminal na pasta Testando-Django
-#virtualenv nome_env
-#source nome_env/Scripts/activate
+virtualenv nome_env
+source nome_env/Scripts/activate
 
-#pip install django
+pip install django
 
