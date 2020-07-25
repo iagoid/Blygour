@@ -45,9 +45,19 @@ class Comments(models.Model):
     user = models.ForeignKey(get_user_model(), verbose_name='Usuário', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, verbose_name='Post', on_delete=models.CASCADE)
     comment = models.TextField('Texto da Postagem')
+    parent = models.ForeignKey(to='self', null=True, blank=True, related_name="Respostas", on_delete=models.CASCADE)
 
     created_at = models.DateTimeField('Criado em :', auto_now_add = True)
     updated_at = models.DateTimeField('Modificado em :', auto_now = True)
+
+    def children(self):
+        return Comments.objects.filter(parent=self)
+
+    @property
+    def is_parent(self):
+        if self.parent is not None:
+            return False
+        return True
 
     def __str__(self):
         return self.comment

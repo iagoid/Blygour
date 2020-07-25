@@ -76,7 +76,8 @@ def addPost(request):
 def viewPost(request, id):
     template_name = 'posts/details.html'
     post = get_object_or_404(Post, pk=id)
-    comments = Comments.objects.all().order_by('-created_at').filter(post = post)
+    comments = Comments.objects.all().order_by('-created_at').filter(post = post).filter(parent = None)
+    parent_obj = None
     
     if request.method == 'POST':
         form = CommentsForm(request.POST or None)
@@ -84,6 +85,18 @@ def viewPost(request, id):
             comment = form.save(commit = False)
             comment.user = request.user
             comment.post = post
+            try:
+                parent_id = int(request.POST.get("parent_id"))
+            except:
+                parent_id = None
+            
+            if parent_id:
+                parent_qs = Comments.objects.filter(id = parent_id)
+                if parent_qs.exists() and parent_qs.count() == 1:
+                    parent_obj = parent_qs.first()
+                    comment.parent = parent_obj
+                    
+
             comment.save()
             messages.success(request, 'Comentário enviado com Sucesso')
             return redirect('posts:posts-view', id=post.id)
@@ -95,6 +108,7 @@ def viewPost(request, id):
             'post': post,
             'comments': comments,
             'form': form,
+            'parent': parent_obj,
         }
         return render(request, template_name, context)
 
