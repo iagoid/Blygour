@@ -11,3 +11,8 @@ function postarImagem() {
 $(".comment-reply-btn").click(function () {
   $(this).parent().next(".comment-reply").fadeToggle();
 });
+
+$(".see-reply-btn").click(function () {
+  $(this).parent().next(".see-reply").fadeToggle();
+});
+

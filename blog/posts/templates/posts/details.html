@@ -46,6 +46,7 @@
             </div>
         </div>
 
+        {% if user.is_authenticated %}
         <div class="row">
             <div class="col-12">
                 <form method="POST" enctype="multipart/form-data">
@@ -60,6 +61,8 @@
                 </form>
             </div>
         </div>
+        {% endif %}
+
 
         {% for comment in comments %}
             <div class="row user comments">
@@ -99,6 +102,8 @@
                     {% endwith %}
                     </h5>
                     <div class="comment-reply">
+                        {% if user.is_authenticated %}
+
                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
 
@@ -107,11 +112,13 @@
                             </div>
                             <input type="hidden" name="parent_id" value="{{ comment.id }}">
 
-                            <input type="submit" class="btn btn-block btn-comment" value="Responder">
+                            <input type="submit" class="btn btn-block btn-comment btn-submit" value="Responder">
                         </form>
+                        {% endif %}
 
                         {% for child_comment in comment.children %}
                             <div class="row reply-section">
+                                <div>
                                     <a href="{% url 'posts:profile_user' child_comment.user.username %}" class='user'>
                                         {% if child_comment.user.profile_picture %}
                                             <img class='user-picture' src="/media/{{ child_comment.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
@@ -119,6 +126,7 @@
                                             <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
                                         {% endif %}
                                     </a>
+                                </div>
 
                                 <div class="col">
                                     <a href="{% url 'posts:profile_user' child_comment.user.username %}" class='user'>

@@ -183,24 +183,19 @@ a.user{
 
 /* Comentários */
 .row.user.comments {
-    border-top: 1px solid white;
+    border-top: 1px solid #9761E8;
     padding-top: 15px;
     color: white;
     text-shadow: 1px 1px 1px black;
 }
 
-.comments-actions i, .comments i{
-    justify-content: center;
-    margin-right: 25px;
-}
-
-/* Comments replies */
 .comment-reply{
     display: none;
 }
-.reply-section {
-    border-top: 1px solid rgba(255,255,255,.2);
-    padding: 15px;
+
+.comments-actions i, .comments i{
+    justify-content: center;
+    margin-right: 25px;
 }
 
 /* Menu de opções */
@@ -339,4 +334,3 @@ textarea{
     75% { transform: rotate(-10deg) scale(1.4); }
     100% { transform: rotate(5deg) scale(1.2); }
 }
-

@@ -61,7 +61,8 @@
                                 Categorias
                             </a>
                             <div class="dropdown-menu user" aria-labelledby="navbarDropdown">
-                                {% for tag in tags.all %}
+                                
+                                {% for tag in tags|slice:5 %}
                                     <a href="{% url 'posts:index_tagged' tag %}" class="dropdown-item">
                                         {{ tag.name|slice:"10" }}
                                     </a>
@@ -212,7 +213,7 @@
             <!-- Copyright -->
             <div class="footer-copyright text-center py-3">© 2020 Copyright:
                 <a>
-                    Rede Social Aleatória</a>
+                    Rede Blygour</a>
             </div>
             <!-- Copyright -->
 
