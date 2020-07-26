@@ -12,9 +12,9 @@ class PostAdmin(admin.ModelAdmin):
     visualizar_imagem.short_description = "Imagem Postagem"
 
 class CommentsAdmin(admin.ModelAdmin):
-    list_display = ['user', 'post', 'comment', 'created_at']
-    list_filter = ['post', 'created_at', 'user']
-    search_fields = ['user', 'post', 'comment']
+    list_display = ['user', 'comment', 'created_at']
+    list_filter = ['created_at', 'user']
+    search_fields = ['user', 'comment']
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comments, CommentsAdmin)

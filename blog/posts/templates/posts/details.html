@@ -88,54 +88,58 @@
                         <a class="btn">
                             <i class="fas fa-heart">Curtir</i>
                         </a>
-                        <a class="btn" onclick="AparecerResposta('{{ comment.id }}')">
-                            <i class="fas fa-comment">Reponder</i>
-                        </a>
+                        
+
+                    {% with comment_count=comment.children.count %}
+                    <a class="btn comment-reply-btn">
+                    <i class="fas fa-comment">
+                    {{ comment_count }}
+                    Resposta{{ comment_count|pluralize}}</i>
+                    </a>
+                    {% endwith %}
                     </h5>
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
+                    <div class="comment-reply">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
 
-                        <div class="field">
-                            {{ form.comment }}
-                        </div>
-                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
-
-                        <input type="submit" class="btn btn-block btn-comment" value="Responder">
-                    </form>
-
-                    {% for child_comment in comment.children %}
-                        <hr>
-                        <div class="row">
-                            <div>
-                                <a href="{% url 'posts:profile_user' child_comment.user.username %}" class='user'>
-                                    {% if child_comment.user.profile_picture %}
-                                        <img class='user-picture' src="/media/{{ child_comment.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
-                                    {% else %}
-                                        <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
-                                    {% endif %}
-                                </a>
+                            <div class="field">
+                                {{ form.comment }}
                             </div>
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
 
-                            <div class="col">
-                                <a href="{% url 'posts:profile_user' child_comment.user.username %}" class='user'>
-                                    <h5>
-                                        {{ child_comment.user }}
-                                    </h5>
-                                </a>
+                            <input type="submit" class="btn btn-block btn-comment" value="Responder">
+                        </form>
 
-                                <h6 class="data-update">{{ commchild_commentent.updated_at }}</h6>
-
-                                <p>{{ child_comment }}</p>
-                                <h5>
-                                    <a class="btn">
-                                        <i class="fas fa-heart">Curtir</i>
+                        {% for child_comment in comment.children %}
+                            <div class="row reply-section">
+                                    <a href="{% url 'posts:profile_user' child_comment.user.username %}" class='user'>
+                                        {% if child_comment.user.profile_picture %}
+                                            <img class='user-picture' src="/media/{{ child_comment.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                                        {% else %}
+                                            <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                                        {% endif %}
                                     </a>
-                                </h5>
+
+                                <div class="col">
+                                    <a href="{% url 'posts:profile_user' child_comment.user.username %}" class='user'>
+                                        <h5>
+                                            {{ child_comment.user }}
+                                        </h5>
+                                    </a>
+
+                                    <h6 class="data-update">{{ child_comment.updated_at }}</h6>
+
+                                    <p>{{ child_comment }}</p>
+                                    <h5>
+                                        <a class="btn">
+                                            <i class="fas fa-heart">Curtir</i>
+                                        </a>
+                                    </h5>
+                                </div>
                             </div>
-                        </div>
 
-                    {% endfor %}
-
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         {% endfor %}

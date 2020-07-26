@@ -1,0 +1,7 @@
+# Dir and Files to Ignore
+__pycache__/
+venv/
+env/
+*.pyc
+*.sqlite3
+media/
