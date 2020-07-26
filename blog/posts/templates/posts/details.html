@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 
 {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
     <link rel="stylesheet" href="{% static 'css/add-post.css' %}">
 {% endblock styles %}
 
@@ -56,8 +57,8 @@
                         {{ form.comment }}
                     </div>
 
-                    <input type="submit" class="btn btn-block btn-comment" value="Enviar">
-
+                    <input type="submit" class="btn btn-submit btn-block " value="Enviar">
+                    
                 </form>
             </div>
         </div>

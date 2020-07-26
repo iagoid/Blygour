@@ -17,11 +17,15 @@ textarea{
     resize: none;
 }
 
-input[type='text']:hover, input[type='text']:focus, 
+#id_text {
+    border: 1px solid black;
+}
+
 #id_text:hover, #id_text:focus{
-    box-shadow: none;
-    border: 2px solid black;
+    border: 1px solid black;
     outline: none;
+    box-shadow: 0px 2px 2px black;
+
 }
 
 /* Campo de envio de imagem */
@@ -54,19 +58,6 @@ input[type='file'] {
     background-color: var(--roxo-escuro);
 }
 
-/* Botão submit */
-input[type='submit']{
-    background-color: var(--roxo-principal);
-    border: 1px solid black;
-    color: white;
-}
-
-input[type='submit']:hover, input[type='submit']:focus{
-    background-color: var(--roxo-escuro);
-    color: white;
-    box-shadow: 0px 2px 2px black;
-    border: 1px solid black;
-}
 
 .form-group.image span{
     margin-left: 10px;
