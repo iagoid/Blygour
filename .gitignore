@@ -4,4 +4,4 @@ venv/
 env/
 blog/*.pyc
 blog/*.sqlite3
-blog/media/
+blog/media/profiles
