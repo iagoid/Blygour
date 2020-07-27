@@ -3,15 +3,17 @@ Aprendendo Django2.0 desenvolvendo um site por conta própria esta foi minha pri
 
 ## Clone o arquivo entre pelo terminal na pasta Testando-Django
 '''
-**virtualenv venv**
 
-**source venv/Scripts/activate**
+virtualenv venv
 
-**pip install django**
+source venv/Scripts/activate
 
-**cd blog/**
+pip install django
 
-**python manage.py migrate**
+cd blog/
 
-**python manage.py createsuperuser**
+python manage.py migrate
+
+python manage.py createsuperuser
+
 '''
