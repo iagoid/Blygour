@@ -9,3 +9,4 @@ source nome_env/Scripts/activate
 
 pip install django
 
+# Blygour
