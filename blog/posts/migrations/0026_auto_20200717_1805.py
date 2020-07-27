@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='post',
             name='image',
-            field=models.FileField(default='/media/profiles/avatar.png', upload_to=posts.models.get_file_path, verbose_name='Imagem'),
+            field=models.FileField(default='/media/static/avatar.png', upload_to=posts.models.get_file_path, verbose_name='Imagem'),
         ),
     ]

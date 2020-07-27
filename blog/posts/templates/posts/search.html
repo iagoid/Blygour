@@ -22,7 +22,7 @@
                             {% if user.profile_picture %}
                                 <img class='img-thumbnail' style="height:250px" src="/media/{{ user.profile_picture }}" alt="Profile Picture {{ user.username }}">
                             {% else %}
-                                <img class='img-thumbnail' style="height:250px" src="/media/profiles/avatar.png" alt="Default profile picture">
+                                <img class='img-thumbnail' style="height:250px" src="/media/static/avatar.png" alt="Default profile picture">
                             {% endif %}
                             <h4>{{ user.username }}</h4>
                         </a>
@@ -42,7 +42,7 @@
                             {% if post.user.profile_picture %}
                                 <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
                             {% else %}
-                                <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                                <img class='user-picture' src="/media/static/avatar.png" alt="Default profile picture">
                             {% endif %}
                         </a>
                     </div>

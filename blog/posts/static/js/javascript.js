@@ -8,9 +8,9 @@ function postarImagem() {
   });
 };
 
-$(".see-reply-btn").click(function () {
-  $(this).parent().next(".see-reply").fadeToggle();
-});
+// $(".see-reply-btn").click(function () {
+//   $(this).parent().next(".see-reply").fadeToggle();
+// });
 
 $(".comment-reply-btn").click(function () {
   $(this).parent().next(".comment-reply").fadeToggle();

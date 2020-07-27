@@ -13,7 +13,7 @@ def get_file_path(instance, filename):
     ext = filename.split(".")[-1]
     #Separa o nome da imagem e randomiza suas letras
     filename = filename + '-' + get_random_string(length=32) + '.' + ext
-    return os.path.join(filename)
+    return os.path.join("post/", filename)
 
 class Post(models.Model):
 
