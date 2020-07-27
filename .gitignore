@@ -1,7 +1,7 @@
 # Dir and Files to Ignore
-__pycache__/
+blog/__pycache__/
 venv/
 env/
-*.pyc
-*.sqlite3
-media/
+blog/*.pyc
+blog/*.sqlite3
+blog/media/
