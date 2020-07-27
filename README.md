@@ -18,4 +18,7 @@ python manage.py migrate
 
 python manage.py createsuperuser
 
+python manage.py runserver
 ```
+Pronto, o Blygour já está funcionando
+Entre pelo seu navegador em **http://localhost:8000/**
