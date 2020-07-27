@@ -2,6 +2,7 @@
 blog/__pycache__/
 venv/
 env/
+blog/*.pyc
 blog/*.sqlite3
 blog/media/profiles
 blog/media/post
