@@ -189,7 +189,7 @@ a.user{
     text-shadow: 1px 1px 1px black;
 }
 
-.comment-reply{
+.comment-reply, .reply-section{
     display: none;
 }
 

@@ -6,13 +6,15 @@ function postarImagem() {
   $input.addEventListener('change', function () {
     $fileName.textContent = this.value;
   });
-}
+};
+
+$(".see-reply-btn").click(function () {
+  $(this).parent().next(".see-reply").fadeToggle();
+});
 
 $(".comment-reply-btn").click(function () {
   $(this).parent().next(".comment-reply").fadeToggle();
 });
 
-$(".see-reply-btn").click(function () {
-  $(this).parent().next(".see-reply").fadeToggle();
-});
+
 
