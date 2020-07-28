@@ -9,6 +9,8 @@ urlpatterns = [
 
     path('add-post', views.addPost, name='add-post'),
     path('<int:id>', views.viewPost, name='posts-view'),
+    path('<int:post>/<int:comment>/like/', views.LikeView, name='like_comment'),
+
     path('delete/<int:id>', views.deletePost, name='delete-post'),
     path('edit/<int:id>', views.editPost, name='edit-post'),
     path('profile/<str:username>/', views.profileUser, name='profile_user'),

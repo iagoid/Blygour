@@ -46,6 +46,7 @@ class Comments(models.Model):
     post = models.ForeignKey(Post, verbose_name='Post', on_delete=models.CASCADE)
     comment = models.TextField('Texto da Postagem')
     parent = models.ForeignKey(to='self', null=True, blank=True, related_name="Respostas", on_delete=models.CASCADE)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="comment_likes")
 
     created_at = models.DateTimeField('Criado em :', auto_now_add = True)
     updated_at = models.DateTimeField('Modificado em :', auto_now = True)

@@ -89,10 +89,18 @@
 
                     <p>{{ comment.comment }}</p>
                     <h5>
-                        <a class="btn">
-                            <i class="fas fa-heart">Curtir</i>
-                        </a>
-                        
+                        <form action="{% url 'posts:like_comment' post.id comment.id %}" method="post">
+                            {% csrf_token %}
+                            {% if is_liked %}
+                            <button class="btn-primary" type="submit" id="like" name="comment_id", value="{{ comment.id }}">
+                            <i class="fas fa-heart">Curtir{{ comment.likes.count }}</i>
+                            </button>
+                            {% else %}
+                            <button class="btn" type="submit" id="like" name="comment_id", value="{{ comment.id }}">
+                            <i class="fas fa-heart">Curtir{{ comment.likes.count }}</i>
+                            </button>
+                            {% endif %}
+                        </form>                        
 
                     {% with comment_count=comment.children.count %}
                     <a class="btn comment-reply-btn">

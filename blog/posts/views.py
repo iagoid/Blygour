@@ -1,9 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-
+from django.urls import reverse_lazy, reverse
 from taggit.models import Tag
 
 
@@ -76,8 +76,9 @@ def addPost(request):
 def viewPost(request, id):
     template_name = 'posts/details.html'
     post = get_object_or_404(Post, pk=id)
-    comments = Comments.objects.all().order_by('-created_at').filter(post = post).filter(parent = None)
+    comments = Comments.objects.all().order_by('-created_at').filter(post = post, parent = None)
     parent_obj = None
+    is_liked = False
     
     if request.method == 'POST':
         form = CommentsForm(request.POST or None)
@@ -103,14 +104,31 @@ def viewPost(request, id):
 
     else:
         form = CommentsForm(request.POST)
+        is_liked = False
+
+        if comments.filter(likes=request.user):
+            is_liked = True
         
         context = {
             'post': post,
             'comments': comments,
             'form': form,
             'parent': parent_obj,
+            'is_liked': is_liked,
         }
         return render(request, template_name, context)
+
+def LikeView(request, post, comment):
+    comment = get_object_or_404(Comments, id=request.POST.get('comment_id'))
+    liked = False
+    if comment.likes.filter(id=request.user.id).exists():
+        comment.likes.remove(request.user)
+    else:
+        comment.likes.add(request.user)
+        liked = True
+        
+    return HttpResponseRedirect(reverse('posts:posts-view', args=[int(post)]))
+
 
 # Edit das tarefas
 @login_required 
