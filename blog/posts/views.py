@@ -86,12 +86,14 @@ def viewPost(request, id):
             comment = form.save(commit = False)
             comment.user = request.user
             comment.post = post
+            # Verifica se o campo enviado possui id=parent_id
             try:
                 parent_id = int(request.POST.get("parent_id"))
             except:
                 parent_id = None
-            
+            # Se existir
             if parent_id:
+            	# Pego o id do comentário
                 parent_qs = Comments.objects.filter(id = parent_id)
                 if parent_qs.exists() and parent_qs.count() == 1:
                     parent_obj = parent_qs.first()
@@ -106,8 +108,13 @@ def viewPost(request, id):
         form = CommentsForm(request.POST)
         is_liked = False
 
-        if comments.filter(likes=request.user):
-            is_liked = True
+        # print(f'\n\n{comments}\n\n')
+        # for comment in comments:
+        #     if comment.likes:
+        #         print(f'\n\n{comment.likes}\n\n')
+
+        # if comments.all().comment.likes.filter(id=request.user.id).exists():
+        #     is_liked = True
         
         context = {
             'post': post,

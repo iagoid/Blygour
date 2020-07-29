@@ -50,7 +50,7 @@
                         {% endif %}
 
                         <form action="{% url 'posts:posts-list' %}" class="form-inline my-2 my-lg-0 form-search" method='GET'>
-                            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Titulo " id="search-input" ,="," name="search" value="{{ request.GET.search }}">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Titulo " id="search-input" name="search" value="{{ request.GET.search }}">
                             <button class="btn button-search search-button" type="submit">
                                 <i class="fas fa-search" id="search-icon"></i>
                             </button>

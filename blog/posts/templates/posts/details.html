@@ -72,7 +72,7 @@
                         {% if comment.user.profile_picture %}
                             <img class='user-picture' src="/media/{{ comment.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
                         {% else %}
-                            <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                            <img class='user-picture' src="/media/static/avatar.png" alt="Default profile picture">
                         {% endif %}
                     </a>
 
@@ -132,7 +132,7 @@
                                         {% if child_comment.user.profile_picture %}
                                             <img class='user-picture' src="/media/{{ child_comment.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
                                         {% else %}
-                                            <img class='user-picture' src="/media/profiles/avatar.png" alt="Default profile picture">
+                                            <img class='user-picture' src="/media/static/avatar.png" alt="Default profile picture">
                                         {% endif %}
                                     </a>
                                 </div>
