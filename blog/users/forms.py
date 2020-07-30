@@ -3,12 +3,17 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from posts.utils import generate_hash_key
 from posts.mail import send_mail_template
+from django.core.validators import RegexValidator
 
 from.models import PasswordReset
 
 User = get_user_model()
 
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Apenas caracteres AlfaNuméricos')
+
 class RegisterForm(UserCreationForm):
+
+    username = forms.CharField(validators=[alphanumeric])
     password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirmação de Senha', widget=forms.PasswordInput)
 
@@ -57,6 +62,8 @@ class PasswordResetForm(forms.Form):
 
 
 class SettingsAccountForm(forms.ModelForm):
+    username = forms.CharField(validators=[alphanumeric])
+
 
     # Qual model vai ser pego e quais seus campos
     class Meta:
