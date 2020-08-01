@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filter_tags %}
 
 {% block title %}
     {{ search|title }}
@@ -22,7 +23,7 @@
                             {% if user.profile_picture %}
                                 <img class='img-thumbnail' style="height:250px" src="{{ user.profile_picture.url }}" alt="Profile Picture {{ user.username }}">
                             {% else %}
-                                <img class='img-thumbnail' style="height:250px" src="/media/static/avatar.png" alt="Default profile picture">
+                                <img class='img-thumbnail' style="height:250px" src="{% pattern_picture %}" alt="Default profile picture">
                             {% endif %}
                             <h4>{{ user.username }}</h4>
                         </a>
@@ -42,7 +43,7 @@
                             {% if post.user.profile_picture %}
                                 <img class='user-picture' src="{{ post.user.profile_picture.url }}" alt="Profile Picture {{ post.user }}">
                             {% else %}
-                                <img class='user-picture' src="/media/static/avatar.png" alt="Default profile picture">
+                                <img class='user-picture' src="{% pattern_picture %}" alt="Default profile picture">
                             {% endif %}
                         </a>
                     </div>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filter_tags %}
 <!DOCTYPE html>
 <html lang="pt_br">
     <head>
@@ -79,7 +80,7 @@
                                     {% if request.user.profile_picture %}
                                         <img class='user-picture' src="/media/{{ request.user.profile_picture }}" alt="Profile Picture {{ request.user }}">
                                     {% else %}
-                                        <img class='user-picture' src="/media/static/avatar.png" alt="Default profile picture">
+                                        <img class='user-picture' src="{% pattern_picture %}" alt="Default profile picture">
                                     {% endif %}
                                     <span class="dropdown-perfil">{{ request.user }}</span>
                                 </a>
