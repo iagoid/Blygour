@@ -20,7 +20,7 @@
                 <div class="row user">
                     <div>
                             {% if post.user.profile_picture %}
-                                <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                                <img class='user-picture' src="{{ post.user.profile_picture.url }}" alt="Profile Picture {{ post.user }}">
                             {% else %}
                                 <img class='user-picture' src="/media/static/avatar.png" alt="Default profile picture">
                             {% endif %}
@@ -75,7 +75,7 @@
                 <div class="row post">
                     <div class="col-12">
                         {% if post.image %}
-                            <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
+                            <img src="{{ post.image.url }}" class="img-thumbnail" alt="{{ post.title }}">
                         {% endif %}
 
                         {{ post.text|truncatechars:"650"|linebreaks }}

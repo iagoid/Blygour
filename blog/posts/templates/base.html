@@ -76,13 +76,12 @@
                             <li class="nav-item dropdown">
 
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% if user.profile_picture %}
+                                    {% if request.user.profile_picture %}
                                         <img class='user-picture' src="/media/{{ request.user.profile_picture }}" alt="Profile Picture {{ request.user }}">
-                                        <span class="dropdown-perfil">{{ request.user }}</span>
                                     {% else %}
                                         <img class='user-picture' src="/media/static/avatar.png" alt="Default profile picture">
-                                        <span class="dropdown-perfil">{{ request.user }}</span>
                                     {% endif %}
+                                    <span class="dropdown-perfil">{{ request.user }}</span>
                                 </a>
 
                                 <div class="dropdown-menu user" aria-labelledby="navbarDropdown">

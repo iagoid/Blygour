@@ -20,7 +20,7 @@
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <a href="{% url 'posts:profile_user' user.username %}">
                             {% if user.profile_picture %}
-                                <img class='img-thumbnail' style="height:250px" src="/media/{{ user.profile_picture }}" alt="Profile Picture {{ user.username }}">
+                                <img class='img-thumbnail' style="height:250px" src="{{ user.profile_picture.url }}" alt="Profile Picture {{ user.username }}">
                             {% else %}
                                 <img class='img-thumbnail' style="height:250px" src="/media/static/avatar.png" alt="Default profile picture">
                             {% endif %}
@@ -40,7 +40,7 @@
                     <div>
                         <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>
                             {% if post.user.profile_picture %}
-                                <img class='user-picture' src="/media/{{ post.user.profile_picture }}" alt="Profile Picture {{ post.user }}">
+                                <img class='user-picture' src="{{ post.user.profile_picture.url }}" alt="Profile Picture {{ post.user }}">
                             {% else %}
                                 <img class='user-picture' src="/media/static/avatar.png" alt="Default profile picture">
                             {% endif %}
@@ -96,7 +96,7 @@
                 <div class="row post">
                     <div class="col-12">
                         {% if post.image %}
-                            <img src="/media/{{ post.image }}" class="img-thumbnail" alt="{{ post.title }}">
+                            <img src="{{ post.image.url }}" class="img-thumbnail" alt="{{ post.title }}">
                         {% endif %}
 
                         {{ post.text|truncatechars:"650"|linebreaks }}
