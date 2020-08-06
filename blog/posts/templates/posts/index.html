@@ -16,11 +16,8 @@
                 <div class="row user">
                     <div>
                         <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>
-                            {% if post.user.profile_picture %}
-                                <img class='user-picture' src="{{ post.user.profile_picture.url }}" alt="Profile Picture {{ post.user }}">
-                            {% else %}
-                                <img class='user-picture' src="{% pattern_picture %}" alt="Default profile picture">
-                            {% endif %}
+                            
+                            <img class='user-picture' src="{% check_profile_picture_exists post.user.profile_picture %}" alt="Default profile picture">
                         </a>
                     </div>
 

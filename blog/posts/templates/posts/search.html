@@ -20,11 +20,7 @@
                 {% for user in users %}
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <a href="{% url 'posts:profile_user' user.username %}">
-                            {% if user.profile_picture %}
-                                <img class='img-thumbnail' style="height:250px" src="{{ user.profile_picture.url }}" alt="Profile Picture {{ user.username }}">
-                            {% else %}
-                                <img class='img-thumbnail' style="height:250px" src="{% pattern_picture %}" alt="Default profile picture">
-                            {% endif %}
+                            <img class='img-thumbnail' style="height:250px" src="{% check_profile_picture_exists user.profile_picture %}" alt="Default profile picture">
                             <h4>{{ user.username }}</h4>
                         </a>
                     </div>
@@ -40,11 +36,7 @@
                 <div class="row user">
                     <div>
                         <a href="{% url 'posts:profile_user' post.user.username %}" class='user'>
-                            {% if post.user.profile_picture %}
-                                <img class='user-picture' src="{{ post.user.profile_picture.url }}" alt="Profile Picture {{ post.user }}">
-                            {% else %}
-                                <img class='user-picture' src="{% pattern_picture %}" alt="Default profile picture">
-                            {% endif %}
+                            <img class='user-picture' src="{% check_profile_picture_exists post.user.profile_picture %}" alt="Default profile picture">
                         </a>
                     </div>
 

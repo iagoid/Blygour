@@ -77,11 +77,8 @@
                             <li class="nav-item dropdown">
 
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% if request.user.profile_picture %}
-                                        <img class='user-picture' src="/media/{{ request.user.profile_picture }}" alt="Profile Picture {{ request.user }}">
-                                    {% else %}
-                                        <img class='user-picture' src="{% pattern_picture %}" alt="Default profile picture">
-                                    {% endif %}
+                                    
+                                    <img class='user-picture' src="{% check_profile_picture_exists request.user.profile_picture %}" alt="Default profile picture">
                                     <span class="dropdown-perfil">{{ request.user }}</span>
                                 </a>
 

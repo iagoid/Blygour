@@ -71,11 +71,7 @@
             <div class="row user comments">
                 <div>
                     <a href="{% url 'posts:profile_user' comment.user.username %}" class='user'>
-                        {% if comment.user.profile_picture %}
-                            <img class='user-picture' src="{{ comment.user.profile_picture.url }}" alt="Profile Picture {{ post.user }}">
-                        {% else %}
-                            <img class='user-picture' src="{% pattern_picture %}" alt="Default profile picture">
-                        {% endif %}
+                        <img class='user-picture' src="{% check_profile_picture_exists comment.user.profile_picture %}" alt="Default profile picture">
                     </a>
 
                 </div>
@@ -131,11 +127,7 @@
                             <div class="row reply-section">
                                 <div>
                                     <a href="{% url 'posts:profile_user' child_comment.user.username %}" class='user'>
-                                        {% if child_comment.user.profile_picture %}
-                                            <img class='user-picture' src="{{ child_comment.user.profile_picture.url }}" alt="Profile Picture {{ post.user }}">
-                                        {% else %}
-                                            <img class='user-picture' src="{% pattern_picture %}" alt="Default profile picture">
-                                        {% endif %}
+                                        <img class='user-picture' src="{% check_profile_picture_exists child_comment.user.profile_picture %}" alt="Default profile picture">
                                     </a>
                                 </div>
 
