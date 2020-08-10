@@ -22,10 +22,10 @@ class PostForm(forms.ModelForm):
             'text': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Digite aqui o seu artigo',
+                'id': 'textarea-post'
             }),
             'image': forms.ClearableFileInput(attrs={
                 'id': 'input-file',
-
             }),
             'tags': TagWidget(attrs={
                 'class': 'form-control',

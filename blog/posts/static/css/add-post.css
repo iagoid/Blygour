@@ -14,17 +14,18 @@
 
 textarea{
     margin-top: 15px;
-    resize: none;
+    resize: vertical;
 }
 
-#id_text {
+#textarea-post {
     border: 1px solid black;
 }
 
-#id_text:hover, #id_text:focus{
+#textarea-post:hover, #textarea-post:focus{
     border: 1px solid black;
     outline: none;
     box-shadow: 0px 2px 2px black;
+    /* background-color: #E0FFFF; */
 }
 
 /* Campo de envio de imagem */
@@ -50,13 +51,11 @@ input[type='file'] {
     padding: 6px 15px;
     margin-top: 8px;
     border: 1px solid black;
-    font-weight: bold;
 }
 
 .form-group.image label:hover {
     background-color: var(--roxo-escuro);
 }
-
 
 .form-group.image span{
     margin-left: 10px;
