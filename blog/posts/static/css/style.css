@@ -157,9 +157,10 @@ ul.messages li{
 .conteudo{
     margin-top: 10px;
 }
-.conteudo .view-posts{
+.conteudo .content-border{
     background-image: linear-gradient(to right, #523680, #5A3B8C, #523680);
     border-radius: 8px;
+    padding: 10px;
 }
 
 /* Pesquisa */
@@ -173,7 +174,7 @@ ul.messages li{
 
 
 /* Postagens */
-.view-posts {
+.content-border {
     border: 1px solid white;
     margin-top: 5px;
 }
@@ -203,7 +204,9 @@ a.user{
 /* Comentários */
 .row.user.comments {
     border-top: 1px solid #9761E8;
-    padding-top: 15px;
+    padding: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
     color: white;
     text-shadow: 1px 1px 1px black;
 }
@@ -252,18 +255,18 @@ a.user{
     outline: none;
 }
 
-.view-posts .title {
+.content-border .title {
     text-align: center;
     overflow-wrap: break-word;
 }
 
 /*Postagem Texto */
-.view-posts .post {
+.content-border .post {
     margin-bottom: 10px;
     box-shadow: none;
 }
 
-.view-posts .post p {
+.content-border .post p {
     font-size: max(18px, 0.8vw);
     overflow-wrap: break-word;
     text-align: justify;

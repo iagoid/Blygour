@@ -65,7 +65,8 @@ def addPost(request):
             post.save()
             form.save_m2m()
             messages.success(request, 'Postagem Publicada com Sucesso')
-            return redirect('/')
+            return HttpResponseRedirect(reverse('posts:posts-view', args=[int(post.id)]))
+
 
     else:
         form = PostForm(request.POST, request.FILES)
@@ -165,8 +166,8 @@ def editPost(request, id):
             post.save()
             form.save_m2m()
             messages.success(request, 'Postagem Editada com Sucesso')
-            return redirect('/')
-        
+            return HttpResponseRedirect(reverse('posts:posts-view', args=[int(id)]))
+
         else:
             messages.warning(request, 'Erro ao editar')
             return render(request, template_name, context)

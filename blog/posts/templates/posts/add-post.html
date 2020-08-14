@@ -14,10 +14,10 @@
 
 {% block content %}
 
-    <div class="container postagem">
+    <div class="content-border">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            
+
             <div class="field">
                 {{ form.title }}
                 {{ form.tags }}
@@ -27,18 +27,15 @@
 
             <div class='form-group image'>
                 <label for='input-file' onclick="postarImagem()">
-                   <i class="fas fa-images"></i>
+                    <i class="fas fa-images"></i>
                 </label>
                 {{ form.image }}
                 <span id='file-name'></span>
 
-                
                 <input type="submit" class="btn btn-submit" value="Enviar">
             </div>
 
         </form>
-
-        
 
     </div>
 

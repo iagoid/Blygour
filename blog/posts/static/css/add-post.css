@@ -1,13 +1,4 @@
 /* Formulário de postagens */
-.container.postagem{
-    border: 1px solid white;
-    border-radius: 8px;
-}
-
-.container.postagem .field{
-    margin-top: 10px;
-}
-
 #input-tags{
     margin-top: 15px;
 }
