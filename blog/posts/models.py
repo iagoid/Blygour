@@ -36,6 +36,10 @@ class Post(models.Model):
     def __str__(self):
         return self.text
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("posts:posts-view", args=[int(self.id)])
+
     class Meta:
         verbose_name = 'Postagem'
         verbose_name_plural = 'Postagens'

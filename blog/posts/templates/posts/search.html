@@ -3,7 +3,7 @@
 {% load custom_filter_tags %}
 
 {% block title %}
-    {{ search|title }}
+    {{ search|title }} | Blygour
 {% endblock title %}
 
 {% block styles %}
@@ -77,7 +77,7 @@
                 </div>
             {% endblock user_informations %}
 
-            <a href="{% url 'posts:posts-view' post.id %}">
+            <a href="{{ post.get_absolute_url }}">
                 <div class="row title">
                     <div class="col-12">
                         <h2>

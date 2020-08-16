@@ -4,7 +4,7 @@
 
 
 {% block title %}
-    Página Inicial
+    Blygour | Página Inicial
 {% endblock title %}
 
 {% block content %}
@@ -57,7 +57,7 @@
                 </div>
             {% endblock user_informations %}
 
-            <a href="{% url 'posts:posts-view' post.id %}">
+            <a href="{{ post.get_absolute_url }}">
                 <div class="row title">
                     <div class="col-12">
                         <h2>

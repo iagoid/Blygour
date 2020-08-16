@@ -18,41 +18,46 @@ def postsList(request, tag=None):
 
     model = Post
 
-    if search:
-
-        posts = Post.objects.order_by('-created_at').filter(title__icontains=search)
-
-        users = User.objects.filter(username__icontains=search)
-        template_name = 'posts/search.html'
-
-        context = {
-            'posts': posts,
-            'users': users,
-            'search': search,
-            'tags': tags,
-        }
-        return render(request,template_name, context)
+    # Se foi passado o parametro tag
+    if tag:
+        posts_list = Post.objects.all().filter(tags__slug__icontains=tag).order_by('-created_at')
 
     else:
-        # Se foi passado o parametro tag
-        if tag:
-            posts_list = Post.objects.all().filter(tags__slug__icontains=tag).order_by('-created_at')
+        posts_list = Post.objects.all().order_by('-created_at')
 
-        else:
-            posts_list = Post.objects.all().order_by('-created_at')
+    paginator = Paginator(posts_list, 7)
+    page = request.GET.get('page')
 
-        paginator = Paginator(posts_list, 7)
-        page = request.GET.get('page')
+    posts = paginator.get_page(page)
 
-        posts = paginator.get_page(page)
-
-        context = {
-            'posts': posts,
-            'tags': tags,
-        }
+    context = {
+        'posts': posts,
+        'tags': tags,
+    }
+        
+    return render(request, 'posts/index.html', context)
             
-        return render(request, 'posts/index.html', context)
-            
+def search(request, tag=None):
+    search = request.GET.get('search')
+    
+    tags = Post.tags.all()
+
+    model = Post
+
+
+    posts = Post.objects.order_by('-created_at').filter(title__icontains=search)
+
+    users = User.objects.filter(username__icontains=search)
+    template_name = 'posts/search.html'
+
+    context = {
+        'posts': posts,
+        'users': users,
+        'search': search,
+        'tags': tags,
+    }
+    return render(request,template_name, context)
+
 @login_required
 def addPost(request):
 
@@ -189,7 +194,7 @@ def deletePost(request, id):
 
 def profileUser(request, username):
     user = get_object_or_404(User, username = username)
-    template_name = 'posts/user_details.html'
+    template_name = 'posts/user_posts.html'
 
     posts_list = Post.objects.all().order_by('-created_at').filter(user = user)
 

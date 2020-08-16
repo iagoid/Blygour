@@ -8,6 +8,21 @@ function postarImagem() {
   });
 };
 
+// TODO: colocar imagem em um local adequado
+// $(function(){
+//   $('#input-file').change(function(){
+//     const file = $(this)[0].files[0]
+//     const fileReader = new FileReader()
+//     fileReader.onloadend = function(){
+//       $('#img').attr('src', fileReader.result)
+//     }
+//     fileReader.readAsDataURL(file)
+//   })
+// })
+
+
+
+// Exibir e ocultar respostas de comentários
 // $(".see-reply-btn").click(function () {
 //   $(this).parent().next(".see-reply").fadeToggle();
 // });
