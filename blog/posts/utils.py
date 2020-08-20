@@ -1,6 +1,4 @@
 from django.core.paginator import Paginator
-from django.contrib import messages
-from django.shortcuts import redirect
 
 import hashlib
 import string
