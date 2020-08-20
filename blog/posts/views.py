@@ -1,16 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
 from taggit.models import Tag
 
-
 from users.models import User
 from .forms import PostForm, CommentsForm
 from .models import Post, Comments
-
+from .utils import pagination
 
 def postsList(request, tag=None):
     template_name = 'posts/index.html'
@@ -26,10 +24,7 @@ def postsList(request, tag=None):
     else:
         posts_list = Post.objects.all().order_by('-created_at')
 
-    paginator = Paginator(posts_list, 7)
-    page = request.GET.get('page')
-
-    posts = paginator.get_page(page)
+    posts = pagination(request, posts_list)
 
     context = {
         'posts': posts,
@@ -157,6 +152,8 @@ def LikeView(request, post, comment):
     return HttpResponseRedirect(reverse('posts:posts-view', args=[int(post)]))
 
 # Edit das tarefas
+
+
 @login_required
 def editPost(request, id):
     post = get_object_or_404(Post, pk=id)
@@ -214,10 +211,8 @@ def profileUser(request, username):
 
     posts_list = Post.objects.all().order_by('-created_at').filter(user=user)
 
-    paginator = Paginator(posts_list, 7)
-    page = request.GET.get('page')
+    posts = pagination(request, posts_list)
 
-    posts = paginator.get_page(page)
     context = {
         'user': user,
         'posts': posts

@@ -1,3 +1,11 @@
+// Tempo que mensagens aparecem na tela
+$(document).ready(function() {
+  // messages timeout for 5 sec 
+  setTimeout(function() {
+      $('.messages').fadeOut('slow');
+  }, 5000); // <-- time in milliseconds, 1000 =  1 sec
+});
+
 // Função para pegar o nome da imagem
 function postarImagem() {
   var $input = document.getElementById('input-file')
@@ -21,12 +29,7 @@ function postarImagem() {
 // })
 
 
-
 // Exibir e ocultar respostas de comentários
-// $(".see-reply-btn").click(function () {
-//   $(this).parent().next(".see-reply").fadeToggle();
-// });
-
 $(".comment-reply-btn").click(function () {
   $(this).parent().next(".comment-reply").fadeToggle();
 });
