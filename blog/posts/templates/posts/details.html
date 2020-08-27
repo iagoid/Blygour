@@ -52,7 +52,7 @@
         {% if user.is_authenticated %}
         <div class="row">
             <div class="col-12">
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data" class="form_comments">
                     {% csrf_token %}
 
                     <div class="field">
@@ -111,7 +111,7 @@
                     <div class="comment-reply">
                         {% if user.is_authenticated %}
 
-                        <form method="POST" enctype="multipart/form-data">
+                        <form method="POST" enctype="multipart/form-data" class="form_comments">
                             {% csrf_token %}
 
                             <div class="field">
@@ -157,3 +157,7 @@
     </div>
 
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/ajax.js' %}"></script>
+{% endblock scripts %}

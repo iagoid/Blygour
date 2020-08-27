@@ -127,7 +127,7 @@ def viewPost(request, id):
                 print(f'{comment.user_id}\n\n')
                 print((comment.likes))
 
-        # if comments.all().comment.likes.filter(id=request.user.id).exists():
+        # if comments.all().comment.likes.filter(id=reqszuest.user.id).exists():
             # is_liked = True
 
         context = {
