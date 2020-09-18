@@ -1,69 +1,58 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
 from taggit.models import Tag
 
+
 from users.models import User
 from .forms import PostForm, CommentsForm
 from .models import Post, Comments
-from .utils import pagination
 
 def postsList(request, tag=None):
-    template_name = 'posts/index.html'
+    search = request.GET.get('search')
+    
     tags = Post.tags.all()
 
     model = Post
 
-    # Se foi passado o parametro tag
-    if tag:
-        posts_list = Post.objects.all().filter(
-            tags__slug__icontains=tag).order_by('-created_at')
+    if search:
+
+        posts = Post.objects.order_by('-created_at').filter(title__icontains=search)
+
+        users = User.objects.filter(username__icontains=search)
+        template_name = 'posts/search.html'
+
+        context = {
+            'posts': posts,
+            'users': users,
+            'search': search,
+            'tags': tags,
+        }
+        return render(request,template_name, context)
 
     else:
-        posts_list = Post.objects.all().order_by('-created_at')
+        # Se foi passado o parametro tag
+        if tag:
+            posts_list = Post.objects.all().filter(tags__slug__icontains=tag).order_by('-created_at')
 
-    posts = pagination(request, posts_list)
+        else:
+            posts_list = Post.objects.all().order_by('-created_at')
 
-    context = {
-        'posts': posts,
-        'tags': tags,
-    }
+        paginator = Paginator(posts_list, 7)
+        page = request.GET.get('page')
 
-    return render(request, template_name, context)
+        posts = paginator.get_page(page)
 
-# TODO: Search com tags
-
-
-def search(request, tag=None):
-    search = request.GET.get('search')
-
-    tags = Post.tags.all()
-
-    model = Post
-
-    posts = Post.objects.filter(
-        title__icontains=search).order_by('-created_at')
-
-    # Se foi passado o parametro tag
-    if tag:
-        posts = posts.objects.all().filter(
-            tags__slug__icontains=tag).order_by('-created_at')
-
-    users = User.objects.filter(username__icontains=search)
-    template_name = 'posts/search.html'
-
-    context = {
-        'posts': posts,
-        'users': users,
-        'search': search,
-        'tags': tags,
-    }
-
-    return render(request, template_name, context)
-
-
+        context = {
+            'posts': posts,
+            'tags': tags,
+        }
+            
+        return render(request, 'posts/index.html', context)
+            
 @login_required
 def addPost(request):
 
@@ -71,32 +60,31 @@ def addPost(request):
         form = PostForm(request.POST, request.FILES)
 
         if form.is_valid():
-            post = form.save(commit=False)
+            post = form.save(commit = False)
             post.user = request.user
             post.save()
             form.save_m2m()
             messages.success(request, 'Postagem Publicada com Sucesso')
             return HttpResponseRedirect(reverse('posts:posts-view', args=[int(post.id)]))
 
+
     else:
         form = PostForm(request.POST, request.FILES)
         return render(request, 'posts/add-post.html', {'form': form})
+        
 
 # Detalhes dos posts
-
-
 def viewPost(request, id):
     template_name = 'posts/details.html'
     post = get_object_or_404(Post, pk=id)
-    comments = Comments.objects.all().filter(
-        post=post, parent=None).order_by('-created_at')
+    comments = Comments.objects.all().order_by('-created_at').filter(post = post, parent = None)
     parent_obj = None
     is_liked = False
-
+    
     if request.method == 'POST':
         form = CommentsForm(request.POST or None)
         if form.is_valid():
-            comment = form.save(commit=False)
+            comment = form.save(commit = False)
             comment.user = request.user
             comment.post = post
             # Verifica se o campo enviado possui id=parent_id
@@ -106,11 +94,12 @@ def viewPost(request, id):
                 parent_id = None
             # Se existir
             if parent_id:
-                # Pego o id do comentário
-                parent_qs = Comments.objects.filter(id=parent_id)
+            	# Pego o id do comentário
+                parent_qs = Comments.objects.filter(id = parent_id)
                 if parent_qs.exists() and parent_qs.count() == 1:
                     parent_obj = parent_qs.first()
                     comment.parent = parent_obj
+                    
 
             comment.save()
             messages.success(request, 'Comentário enviado com Sucesso')
@@ -120,16 +109,14 @@ def viewPost(request, id):
         form = CommentsForm(request.POST)
         is_liked = False
 
-        print(f'\n\n{comments}')
-        for comment in comments:
-            if comment.likes:
-                print(comment)
-                print(f'{comment.user_id}\n\n')
-                print((comment.likes))
+        # print(f'\n\n{comments}\n\n')
+        # for comment in comments:
+        #     if comment.likes:
+        #         print(f'\n\n{comment.likes}\n\n')
 
-        # if comments.all().comment.likes.filter(id=reqszuest.user.id).exists():
-            # is_liked = True
-
+        # if comments.all().comment.likes.filter(id=request.user.id).exists():
+        #     is_liked = True
+        
         context = {
             'post': post,
             'comments': comments,
@@ -139,7 +126,6 @@ def viewPost(request, id):
         }
         return render(request, template_name, context)
 
-
 def LikeView(request, post, comment):
     comment = get_object_or_404(Comments, id=request.POST.get('comment_id'))
     liked = False
@@ -148,28 +134,26 @@ def LikeView(request, post, comment):
     else:
         comment.likes.add(request.user)
         liked = True
-
+        
     return HttpResponseRedirect(reverse('posts:posts-view', args=[int(post)]))
 
+
 # Edit das tarefas
-
-
-@login_required
+@login_required 
 def editPost(request, id):
     post = get_object_or_404(Post, pk=id)
     template_name = 'posts/edit_post.html'
+    context = {}
 
     tags = post.tags.all()
     form = PostForm(instance=post)
 
     if post.user != request.user:
         messages.warning(request, 'Você não tem permissão para fazer isso')
-        return redirect('/')
+        return redirect('/') 
 
-    context = {
-        'post': post,
-        'form': form
-    }
+    context['post'] = post
+    context['form'] = form
 
     if request.method == 'POST' or None:
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -189,8 +173,7 @@ def editPost(request, id):
             return render(request, template_name, context)
 
     else:
-        return render(request, 'posts/edit_post.html', context)
-
+        return render(request,'posts/edit_post.html', context)
 
 @login_required
 def deletePost(request, id):
@@ -202,17 +185,18 @@ def deletePost(request, id):
 
     else:
         messages.warning(request, 'Você não tem permissão para fazer isso')
-        return redirect('/')
-
+        return redirect('/') 
 
 def profileUser(request, username):
-    user = get_object_or_404(User, username=username)
-    template_name = 'posts/user_posts.html'
+    user = get_object_or_404(User, username = username)
+    template_name = 'posts/user_details.html'
 
-    posts_list = Post.objects.all().order_by('-created_at').filter(user=user)
+    posts_list = Post.objects.all().order_by('-created_at').filter(user = user)
 
-    posts = pagination(request, posts_list)
+    paginator = Paginator(posts_list, 7)
+    page = request.GET.get('page')
 
+    posts = paginator.get_page(page)
     context = {
         'user': user,
         'posts': posts

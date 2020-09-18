@@ -330,16 +330,6 @@ textarea{
 
 
 /* Footer */
-.footer-copyright h5{
-    font-size: 14px;
-    -webkit-touch-callout: none;  /* iPhone OS, Safari */
-    -webkit-user-select: none;    /* Chrome, Safari 3 */
-    -khtml-user-select: none;     /* Safari 2 */
-    -moz-user-select: none;       /* Firefox */
-    -ms-user-select: none;        /* IE10+ */
-    user-select: none;            /* Possível implementação no futuro */
-} 
-
 .list-inline-item a{
     padding: 5px;
     transition: 0.8s ease;
