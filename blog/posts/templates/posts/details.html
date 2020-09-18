@@ -88,15 +88,15 @@
                     <h5>
                         <form action="{% url 'posts:like_comment' post.id comment.id %}" method="post">
                             {% csrf_token %}
-                            {% if is_liked %}
-                            <button class="btn-primary" type="submit" id="like" name="comment_id", value="{{ comment.id }}">
-                            <i class="fas fa-heart">Curtir{{ comment.likes.count }}</i>
+                            
+                            <button class="btn" type="submit" id="like" name="comment_id" value="{{ comment.id }}">
+                            <h6>
+                                <i class="fas fa-heart 
+                                {% if comment.id in liked %} is_liked 
+                                {% endif %}"></i>
+                                {{ comment.likes.count }}
+                            </h6>
                             </button>
-                            {% else %}
-                            <button class="btn" type="submit" id="like" name="comment_id", value="{{ comment.id }}">
-                            <i class="fas fa-heart">Curtir{{ comment.likes.count }}</i>
-                            </button>
-                            {% endif %}
                         </form>                        
 
                     {% with comment_count=comment.children.count %}

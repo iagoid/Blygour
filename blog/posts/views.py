@@ -107,22 +107,20 @@ def viewPost(request, id):
 
     else:
         form = CommentsForm(request.POST)
-        is_liked = False
+        liked = []
 
-        # print(f'\n\n{comments}\n\n')
-        # for comment in comments:
-        #     if comment.likes:
-        #         print(f'\n\n{comment.likes}\n\n')
+        for comment in comments:
+            if comment.likes.filter(id=request.user.id).exists():
+                print(comment.id)
+                liked.append(comment.id)
 
-        # if comments.all().comment.likes.filter(id=request.user.id).exists():
-        #     is_liked = True
         
         context = {
             'post': post,
             'comments': comments,
             'form': form,
             'parent': parent_obj,
-            'is_liked': is_liked,
+            'liked': liked,
         }
         return render(request, template_name, context)
 

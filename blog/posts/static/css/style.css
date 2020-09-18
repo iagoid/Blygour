@@ -172,7 +172,6 @@ ul.messages li{
 }
 
 
-
 /* Postagens */
 .content-border {
     border: 1px solid white;
@@ -189,6 +188,11 @@ ul.messages li{
     width: 70px;
     border-radius: 50vh;
     margin-left: 10px;
+}
+
+/* Likes */
+.is_liked {
+    color: red;
 }
 
 /* Nome usuario */
